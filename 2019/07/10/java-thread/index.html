@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="thread,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ziggle" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="终止线程的方法使用退出标志退出线程Interrupt 方法结束线程123456789101112 public class ThreadSafe extends Thread &amp;#123;    public void run() &amp;#123;        while (!isInterrupted())&amp;#123; //非阻塞过程中通过判断中断标志来退出            try&amp;#123">
+<meta name="keywords" content="thread">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java-thread">
+<meta property="og:url" content="http://yoursite.com/2019/07/10/java-thread/index.html">
+<meta property="og:site_name" content="ziggle">
+<meta property="og:description" content="终止线程的方法使用退出标志退出线程Interrupt 方法结束线程123456789101112 public class ThreadSafe extends Thread &amp;#123;    public void run() &amp;#123;        while (!isInterrupted())&amp;#123; //非阻塞过程中通过判断中断标志来退出            try&amp;#123">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2021-05-09T18:27:16.087Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java-thread">
+<meta name="twitter:description" content="终止线程的方法使用退出标志退出线程Interrupt 方法结束线程123456789101112 public class ThreadSafe extends Thread &amp;#123;    public void run() &amp;#123;        while (!isInterrupted())&amp;#123; //非阻塞过程中通过判断中断标志来退出            try&amp;#123">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":10,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/10/java-thread/">
+
+
+
+
+
+  <title>java-thread | ziggle</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ziggle</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Hail Hydra</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        
+          <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/10/java-thread/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ziggle">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ziggle">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">java-thread</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-10T18:37:00+00:00">
+                2019-07-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+<div class="semantic">
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="终止线程的方法"><a href="#终止线程的方法" class="headerlink" title="终止线程的方法"></a>终止线程的方法</h3><h4 id="使用退出标志退出线程"><a href="#使用退出标志退出线程" class="headerlink" title="使用退出标志退出线程"></a>使用退出标志退出线程</h4><h4 id="Interrupt-方法结束线程"><a href="#Interrupt-方法结束线程" class="headerlink" title="Interrupt 方法结束线程"></a>Interrupt 方法结束线程</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadSafe</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (!isInterrupted())&#123; <span class="comment">//非阻塞过程中通过判断中断标志来退出</span></span><br><span class="line">            <span class="keyword">try</span>&#123;</span><br><span class="line">                Thread.sleep(<span class="number">5</span>*<span class="number">1000</span>);<span class="comment">//阻塞过程捕获中断异常来退出</span></span><br><span class="line">            &#125;<span class="keyword">catch</span>(InterruptedException e)&#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">                <span class="keyword">break</span>;<span class="comment">//捕获到异常之后，执行 break 跳出循环</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="sleep-与-wait-区别"><a href="#sleep-与-wait-区别" class="headerlink" title="sleep 与 wait 区别"></a>sleep 与 wait 区别</h4><ol>
+<li>对于 sleep()方法，我们首先要知道该方法是属于 Thread 类中的。而 wait()方法，则是属于<br>Object 类中的。</li>
+<li>sleep()方法导致了程序暂停执行指定的时间，让出 cpu 该其他线程，但是他的监控状态依然<br>保持者，当指定的时间到了又会自动恢复运行状态。</li>
+<li>在调用 sleep()方法的过程中，线程不会释放对象锁。</li>
+<li>而当调用 wait()方法的时候，线程会放弃对象锁，进入等待此对象的等待锁定池，只有针对此<br>对象调用 notify()方法后本线程才进入对象锁定池准备获取对象锁进入运行状态</li>
+</ol>
+<p>ref = <code>https://mrbird.cc/JUC-CyclicBarrier.html</code></p>
+<h3 id="JUC之CyclicBarrier"><a href="#JUC之CyclicBarrier" class="headerlink" title="JUC之CyclicBarrier"></a>JUC之CyclicBarrier</h3><p>CyclicBarrier的字面意思是可循环使用（Cyclic）的屏障（Barrier）。它要做的事情是，让一组线程到达一个屏障（也可以叫同步点）时被阻塞，直到最后一个线程到达屏障时，屏障才会开门，所有被屏障拦截的线程才会继续运行。CyclicBarrier默认的构造方法是CyclicBarrier(int parties)，其参数表示屏障拦截的线程数量，每个线程调用await方法告诉CyclicBarrier我已经到达了屏障，然后当前线程被阻塞。</p>
+<h4 id="CyclicBarrier的构造函数支持传入一个回调方法："><a href="#CyclicBarrier的构造函数支持传入一个回调方法：" class="headerlink" title="CyclicBarrier的构造函数支持传入一个回调方法："></a>CyclicBarrier的构造函数支持传入一个回调方法：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CyclicBarrier barrier = <span class="keyword">new</span> CyclicBarrier(n, () -&gt; &#123;</span><br><span class="line">    System.out.println(<span class="string">"当所有线程到达屏障时，执行该回调"</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="设置超时时间"><a href="#设置超时时间" class="headerlink" title="设置超时时间"></a>设置超时时间</h4><p>await的重载方法：await(long timeout, TimeUnit unit)可以设置最大等待时长，超出这个时间屏障还没有开启的话则抛出TimeoutException：</p>
+<h4 id="BrokenBarrierException"><a href="#BrokenBarrierException" class="headerlink" title="BrokenBarrierException"></a>BrokenBarrierException</h4><p>抛出BrokenBarrierException异常时表示屏障破损，此时标志位broken=true。抛出BrokenBarrierException异常的情况主要有：</p>
+<ul>
+<li>其他等待的线程被中断，则当前线程抛出BrokenBarrierException异常；</li>
+<li>其他等待的线程超时，则当前线程抛出BrokenBarrierException异常；</li>
+<li>当前线程在等待时，其他线程调用CyclicBarrier.reset()方法，则当前线程抛出BrokenBarrierException异常。</li>
+</ul>
+<h4 id="和CountDownLatch区别"><a href="#和CountDownLatch区别" class="headerlink" title="和CountDownLatch区别"></a>和CountDownLatch区别</h4><ul>
+<li><p>CountDownLatch：一个线程(或者多个)，等待另外N个线程完成某个事情之后才能执行；CyclicBarrier：N个线程相互等待，任何一个线程完成之前，所有的线程都必须等待。</p>
+</li>
+<li><p>CountDownLatch：一次性的；CyclicBarrier：可以重复使用。</p>
+</li>
+</ul>
+<h3 id="JUC之CountDownLatch"><a href="#JUC之CountDownLatch" class="headerlink" title="JUC之CountDownLatch"></a>JUC之CountDownLatch</h3><p><code>CountDownLatch</code>允许一个或多个线程等待其他线程完成操作。定义<code>CountDownLatch</code>的时候，需要传入一个正数来初始化计数器（虽然传入0也可以，但这样的话CountDownLatch没什么实际意义）。其countDown方法用于递减计数器，await方法会使当前线程阻塞，直到计数器递减为0。所以<code>CountDownLatch</code>常用于多个线程之间的协调工作。</p>
+<h4 id="threadpool-关闭方法"><a href="#threadpool-关闭方法" class="headerlink" title="threadpool 关闭方法"></a>threadpool 关闭方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">threadPool.shutdown(); <span class="comment">// Disable new tasks from being submitted</span></span><br><span class="line">    <span class="comment">// 设定最大重试次数</span></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// 等待 60 s</span></span><br><span class="line">        <span class="keyword">if</span> (!threadPool.awaitTermination(<span class="number">60</span>, TimeUnit.SECONDS)) &#123;</span><br><span class="line">            <span class="comment">// 调用 shutdownNow 取消正在执行的任务</span></span><br><span class="line">            threadPool.shutdownNow();</span><br><span class="line">            <span class="comment">// 再次等待 60 s，如果还未结束，可以再次尝试，或则直接放弃</span></span><br><span class="line">            <span class="keyword">if</span> (!threadPool.awaitTermination(<span class="number">60</span>, TimeUnit.SECONDS))</span><br><span class="line">                System.err.println(<span class="string">"线程池任务未正常执行结束"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (InterruptedException ie) &#123;</span><br><span class="line">        <span class="comment">// 重新调用 shutdownNow</span></span><br><span class="line">        threadPool.shutdownNow();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h3><p>调用 Executor 的 shutdown() 方法会等待线程都执行完毕之后再关闭，但是如果调用的是 shutdownNow() 方法，则相当于调用每个线程的 interrupt() 方法。<br>以下使用 Lambda 创建线程，相当于创建了一个匿名内部线程。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    ExecutorService executorService = Executors.newCachedThreadPool();</span><br><span class="line">    executorService.execute(() -&gt; &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">            System.out.println(<span class="string">"Thread run"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    executorService.shutdownNow();</span><br><span class="line">    System.out.println(<span class="string">"Main run"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Main run</span><br><span class="line">java.lang.InterruptedException: sleep interrupted</span><br><span class="line">    at java.lang.Thread.sleep(Native Method)</span><br><span class="line">    at ExecutorInterruptExample.lambda$main$<span class="number">0</span>(ExecutorInterruptExample.java:<span class="number">9</span>)</span><br><span class="line">    at ExecutorInterruptExample$$Lambda$<span class="number">1</span>/<span class="number">1160460865</span>.run(Unknown Source)</span><br><span class="line">    at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:<span class="number">1142</span>)</span><br><span class="line">    at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:<span class="number">617</span>)</span><br><span class="line">    at java.lang.Thread.run(Thread.java:<span class="number">745</span>)</span><br></pre></td></tr></table></figure>
+<p>如果只想中断 Executor 中的一个线程，可以通过使用 submit() 方法来提交一个线程，它会返回一个 Future&lt;?&gt; 对象，通过调用该对象的 cancel(true) 方法就可以中断线程。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Future&lt;?&gt; future = executorService.submit(() -&gt; &#123;</span><br><span class="line">    <span class="comment">// ..</span></span><br><span class="line">&#125;);</span><br><span class="line">future.cancel(<span class="keyword">true</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="Java并发之线程中断"><a href="#Java并发之线程中断" class="headerlink" title="Java并发之线程中断"></a>Java并发之线程中断</h3><p>线程在不同状态下对于中断所产生的反应<br>     线程一共6种状态，分别是NEW，RUNNABLE，BLOCKED，WAITING，TIMED_WAITING，TERMINATED（Thread类中有一个State枚举类型列举了线程的所有状态）。下面我们就将把线程分别置于上述的不同种状态，然后看看我们的中断操作对它们的影响。</p>
+<p>1、NEW和TERMINATED<br>     线程的new状态表示还未调用start方法，还未真正启动。线程的terminated状态表示线程已经运行终止。这两个状态下调用中断方法来中断线程的时候，Java认为毫无意义，所以并不会设置线程的中断标识位，什么事也不会发生。例如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line"></span><br><span class="line">    Thread thread = <span class="keyword">new</span> MyThread();</span><br><span class="line">    System.out.println(thread.getState());</span><br><span class="line"></span><br><span class="line">    thread.interrupt();</span><br><span class="line"></span><br><span class="line">    System.out.println(thread.isInterrupted());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="什么是上下文切换"><a href="#什么是上下文切换" class="headerlink" title="什么是上下文切换"></a>什么是上下文切换</h4><p>多线程编程中线程数一般大于cpu的个数, 而一个cpu在任意时刻只能被一个线程使用,为了让这些线程都可以有效执行, cpu采用的是为每个线程分配时间片并轮转的形式, 当一个线程的时间片用完的时候就会重新处于就绪状态让其他线程使用,这个过程就是一次上下文切换</p>
+<p>当cpu切换到另一个任务之前会先保存自己的状态, 以便于切换回这个任务, 任务从保存到在加载的过程就是一次上下文切换</p>
+<h4 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized"></a>synchronized</h4><p>使用方式<br>1 修饰实例方法,<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span>&#123;</span><br><span class="line"> <span class="comment">// 禁止指令重排</span></span><br><span class="line"> <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Singleton instance;</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">private</span> <span class="title">Singletion</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Signleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">// 没有初始化才进行下面逻辑</span></span><br><span class="line">     <span class="keyword">if</span>(instance !=<span class="keyword">null</span> )&#123;</span><br><span class="line">         <span class="keyword">synchronized</span>(Singleton.class)&#123;</span><br><span class="line">             <span class="keyword">if</span>(instance  == <span class="keyword">null</span>)&#123;</span><br><span class="line">                 instance = <span class="keyword">new</span> Singleton</span><br><span class="line">             &#125;</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">return</span> instance;</span><br><span class="line"> &#125;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h5 id="volatail"><a href="#volatail" class="headerlink" title="volatail"></a>volatail</h5><p>比 sychronized 更轻量级的同步锁<br>在访问 volatile 变量时不会执行加锁操作，因此也就不会使执行线程阻塞，因此 volatile 变量是一<br>种比 sychronized 关键字更轻量级的同步机制。volatile 适合这种场景：一个变量被多个线程共<br>享，线程直接给这个变量赋值。</p>
+<p>当对非 volatile 变量进行读写的时候，每个线程先从内存拷贝变量到 CPU 缓存中。如果计算机有<br>多个 CPU，每个线程可能在不同的 CPU 上被处理，这意味着每个线程可以拷贝到不同的 CPU<br>cache 中。而声明变量是 volatile 的，JVM 保证了每次读变量都从内存中读，跳过 CPU cache<br>这一步。</p>
+<p>字节码<br>使用monitorenter monitorexit 指令, </p>
+<p>synchronized /ReentrantLock</p>
+<ul>
+<li>都是可重入锁, 自己可以再次获取自己的内部锁, 比如一个线程获取某个对象的锁, 这个对象的锁还没有释放, 当再次获取这个锁的时候还是可以获取的</li>
+<li>sync.. 依赖于jvm ReentrantLock java实现(lock(),unlock() ,try/finally 实现)</li>
+<li>ReentrantLock 添加了一些高级功能, 等待可中断, 可以实现公平锁, 可以实现选择性通知</li>
+<li>ReentrantLock 可以指定是公平锁还是非公平锁 默认非公平锁, synchronized 只能是非公平锁</li>
+<li>性能已经不是主要选择项</li>
+</ul>
+<h4 id="ThreadPoolExecutor-饱和策略定义"><a href="#ThreadPoolExecutor-饱和策略定义" class="headerlink" title="ThreadPoolExecutor 饱和策略定义"></a>ThreadPoolExecutor 饱和策略定义</h4><p>AbortPolicy<br>CallerRunsPolicy<br>DiscardPolicy<br>DiscardOldPolicy</p>
+<h4 id="Java-锁"><a href="#Java-锁" class="headerlink" title="Java 锁"></a>Java 锁</h4><h5 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h5><p>乐观锁是一种乐观思想，即认为读多写少，遇到并发写的可能性低，每次去拿数据的时候都认为<br>别人不会修改，所以不会上锁，但是在更新的时候会判断一下在此期间别人有没有去更新这个数<br>据，采取在写时先读出当前版本号，然后加锁操作（比较跟上一次的版本号，如果一样则更新），<br>如果失败则要重复读-比较-写的操作。<br>java 中的乐观锁基本都是通过 CAS 操作实现的，CAS 是一种更新的原子操作，比较当前值跟传入<br>值是否一样，一样则更新，否则失败。</p>
+<h5 id="悲观锁"><a href="#悲观锁" class="headerlink" title="悲观锁"></a>悲观锁</h5><p>悲观锁是就是悲观思想，即认为写多，遇到并发写的可能性高，每次去拿数据的时候都认为别人<br>会修改，所以每次在读写数据的时候都会上锁，这样别人想读写这个数据就会 block 直到拿到锁。<br>java中的悲观锁就是Synchronized,AQS框架下的锁则是先尝试cas乐观锁去获取锁，获取不到，<br>才会转换为悲观锁，如 RetreenLock</p>
+<h5 id="自旋锁"><a href="#自旋锁" class="headerlink" title="自旋锁"></a>自旋锁</h5><p>自旋锁原理非常简单，如果持有锁的线程能在很短时间内释放锁资源，那么那些等待竞争锁<br>的线程就不需要做内核态和用户态之间的切换进入阻塞挂起状态，它们只需要等一等（自旋），<br>等持有锁的线程释放锁后即可立即获取锁，这样就避免用户线程和内核的切换的消耗。<br>线程自旋是需要消耗 cup 的，说白了就是让 cup 在做无用功，如果一直获取不到锁，那线程<br>也不能一直占用 cup 自旋做无用功，所以需要设定一个自旋等待的最大时间。<br>如果持有锁的线程执行的时间超过自旋等待的最大时间扔没有释放锁，就会导致其它争用锁<br>的线程在最大等待时间内还是获取不到锁，这时争用线程会停止自旋进入阻塞状态。</p>
+<p>自旋锁的优缺点<br>自旋锁尽可能的减少线程的阻塞，这对于锁的竞争不激烈，且占用锁时间非常短的代码块来<br>说性能能大幅度的提升，因为自旋的消耗会小于线程<code>阻塞挂起再唤醒</code>的操作的消耗，这些操作会<br>导致线程发生<code>两次上下文切换</code>！<br>但是如果锁的竞争激烈，或者持有锁的线程需要长时间占用锁执行同步块，这时候就不适合<br>使用自旋锁了，因为自旋锁在获取锁前一直都是占用 cpu 做无用功，占着 XX 不 XX，同时有大量<br>线程在竞争一个锁，会导致获取锁的时间很长，线程自旋的消耗大于线程阻塞挂起操作的消耗，<br>其它需要 cup 的线程又不能获取到 cpu，造成 cpu 的浪费。所以这种情况下我们要关闭自旋锁</p>
+
+      
+    </div>
+    
+    
+    
+</div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/thread/" rel="tag"> <i class="fa fa-tag"></i> thread</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/05/alg/" rel="next" title="alg">
+                <i class="fa fa-chevron-left"></i> alg
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/10/java-guava/" rel="prev" title="java-guava">
+                java-guava <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/avatar.png" alt="ziggle">
+            
+              <p class="site-author-name" itemprop="name">ziggle</p>
+              <p class="site-description motion-element" itemprop="description">Hail Hydra !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/youngerier" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#终止线程的方法"><span class="nav-number">1.</span> <span class="nav-text">终止线程的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用退出标志退出线程"><span class="nav-number">1.1.</span> <span class="nav-text">使用退出标志退出线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Interrupt-方法结束线程"><span class="nav-number">1.2.</span> <span class="nav-text">Interrupt 方法结束线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sleep-与-wait-区别"><span class="nav-number">1.3.</span> <span class="nav-text">sleep 与 wait 区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JUC之CyclicBarrier"><span class="nav-number">2.</span> <span class="nav-text">JUC之CyclicBarrier</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CyclicBarrier的构造函数支持传入一个回调方法："><span class="nav-number">2.1.</span> <span class="nav-text">CyclicBarrier的构造函数支持传入一个回调方法：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置超时时间"><span class="nav-number">2.2.</span> <span class="nav-text">设置超时时间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BrokenBarrierException"><span class="nav-number">2.3.</span> <span class="nav-text">BrokenBarrierException</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#和CountDownLatch区别"><span class="nav-number">2.4.</span> <span class="nav-text">和CountDownLatch区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JUC之CountDownLatch"><span class="nav-number">3.</span> <span class="nav-text">JUC之CountDownLatch</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#threadpool-关闭方法"><span class="nav-number">3.1.</span> <span class="nav-text">threadpool 关闭方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程池"><span class="nav-number">4.</span> <span class="nav-text">线程池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java并发之线程中断"><span class="nav-number">5.</span> <span class="nav-text">Java并发之线程中断</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是上下文切换"><span class="nav-number">5.1.</span> <span class="nav-text">什么是上下文切换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#synchronized"><span class="nav-number">5.2.</span> <span class="nav-text">synchronized</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#volatail"><span class="nav-number">5.2.1.</span> <span class="nav-text">volatail</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ThreadPoolExecutor-饱和策略定义"><span class="nav-number">5.3.</span> <span class="nav-text">ThreadPoolExecutor 饱和策略定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Java-锁"><span class="nav-number">5.4.</span> <span class="nav-text">Java 锁</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#乐观锁"><span class="nav-number">5.4.1.</span> <span class="nav-text">乐观锁</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#悲观锁"><span class="nav-number">5.4.2.</span> <span class="nav-text">悲观锁</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#自旋锁"><span class="nav-number">5.4.3.</span> <span class="nav-text">自旋锁</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ziggle</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info"> Hail Hydra&mdash; </div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

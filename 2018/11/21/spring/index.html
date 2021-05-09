@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="ziggle">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ziggle" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="spring 实现拦截的五种姿势使用 Filter 接口Filter 接口由 J2EE 定义，在Servlet执行之前由容器进行调用。而SpringBoot中声明 Filter 又有两种方式：  注册 FilterRegistrationBean声明一个FilterRegistrationBean 实例，对Filter 做一系列定义，如下：1234567891011121314151617@Bea">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spring">
+<meta property="og:url" content="http://yoursite.com/2018/11/21/spring/index.html">
+<meta property="og:site_name" content="ziggle">
+<meta property="og:description" content="spring 实现拦截的五种姿势使用 Filter 接口Filter 接口由 J2EE 定义，在Servlet执行之前由容器进行调用。而SpringBoot中声明 Filter 又有两种方式：  注册 FilterRegistrationBean声明一个FilterRegistrationBean 实例，对Filter 做一系列定义，如下：1234567891011121314151617@Bea">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2018/11/21/spring/interceptor-order.png">
+<meta property="og:updated_time" content="2021-05-09T18:27:16.123Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="spring">
+<meta name="twitter:description" content="spring 实现拦截的五种姿势使用 Filter 接口Filter 接口由 J2EE 定义，在Servlet执行之前由容器进行调用。而SpringBoot中声明 Filter 又有两种方式：  注册 FilterRegistrationBean声明一个FilterRegistrationBean 实例，对Filter 做一系列定义，如下：1234567891011121314151617@Bea">
+<meta name="twitter:image" content="http://yoursite.com/2018/11/21/spring/interceptor-order.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":10,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/21/spring/">
+
+
+
+
+
+  <title>spring | ziggle</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ziggle</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Hail Hydra</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        
+          <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/21/spring/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ziggle">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ziggle">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">spring</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-21T10:38:01+00:00">
+                2018-11-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+<div class="semantic">
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="spring-实现拦截的五种姿势"><a href="#spring-实现拦截的五种姿势" class="headerlink" title="spring 实现拦截的五种姿势"></a>spring 实现拦截的五种姿势</h1><h2 id="使用-Filter-接口"><a href="#使用-Filter-接口" class="headerlink" title="使用 Filter 接口"></a>使用 Filter 接口</h2><p>Filter 接口由 J2EE 定义，在Servlet执行之前由容器进行调用。<br>而SpringBoot中声明 Filter 又有两种方式：</p>
+<ol>
+<li>注册 FilterRegistrationBean<br>声明一个FilterRegistrationBean 实例，对Filter 做一系列定义，如下：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> FilterRegistrationBean <span class="title">customerFilter</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    FilterRegistrationBean registration = <span class="keyword">new</span> FilterRegistrationBean();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置过滤器</span></span><br><span class="line">    registration.setFilter(<span class="keyword">new</span> CustomerFilter());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 拦截路由规则</span></span><br><span class="line">    registration.addUrlPatterns(<span class="string">"/intercept/*"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置初始化参数</span></span><br><span class="line">    registration.addInitParameter(<span class="string">"name"</span>, <span class="string">"customFilter"</span>);</span><br><span class="line"></span><br><span class="line">    registration.setName(<span class="string">"CustomerFilter"</span>);</span><br><span class="line">    registration.setOrder(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> registration;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>其中 CustomerFilter 实现了Filter接口，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CustomerFilter</span> <span class="keyword">implements</span> <span class="title">Filter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(CustomerFilter.class);</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(FilterConfig filterConfig)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">        name = filterConfig.getInitParameter(<span class="string">"name"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest request, ServletResponse response, FilterChain chain)</span></span></span><br><span class="line"><span class="function">            <span class="keyword">throws</span> IOException, ServletException </span>&#123;</span><br><span class="line">        logger.info(<span class="string">"Filter &#123;&#125; handle before"</span>, name);</span><br><span class="line">        chain.doFilter(request, response);</span><br><span class="line">        logger.info(<span class="string">"Filter &#123;&#125; handle after"</span>, name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>@WebFilter 注解<br>为Filter的实现类添加 @WebFilter注解，由SpringBoot 框架扫描后注入</li>
+</ol>
+<p>@WebFilter的启用需要配合@ServletComponentScan才能生效</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@ServletComponentScan</span></span><br><span class="line"><span class="meta">@WebFilter</span>(urlPatterns = <span class="string">"/intercept/*"</span>, filterName = <span class="string">"annotateFilter"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnnotateFilter</span> <span class="keyword">implements</span> <span class="title">Filter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(AnnotateFilter.class);</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String name = <span class="string">"annotateFilter"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(FilterConfig filterConfig)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest request, ServletResponse response, FilterChain chain)</span></span></span><br><span class="line"><span class="function">            <span class="keyword">throws</span> IOException, ServletException </span>&#123;</span><br><span class="line">        logger.info(<span class="string">"Filter &#123;&#125; handle before"</span>, name);</span><br><span class="line">        chain.doFilter(request, response);</span><br><span class="line">        logger.info(<span class="string">"Filter &#123;&#125; handle after"</span>, name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用注解是最简单的，但其缺点是仍然无法支持 order属性(用于控制Filter的排序)。<br>而通常的@Order注解只能用于定义Bean的加载顺序，却真正无法控制Filter排序。<br>这是一个已知问题，<a href="https://github.com/spring-projects/spring-boot/issues/8276?spm=a2c4e.11153940.blogcont626131.9.ab192f15q5eCfw" target="_blank" rel="noopener">参考这里</a></p>
+<a id="more"></a>
+<h2 id="HanlderInterceptor"><a href="#HanlderInterceptor" class="headerlink" title="HanlderInterceptor"></a>HanlderInterceptor</h2><p>HandlerInterceptor 用于拦截 Controller 方法的执行，其声明了几个方法：</p>
+<p>方法    说明<br>preHandle    Controller方法执行前调用<br>preHandle    Controller方法后，视图渲染前调用<br>afterCompletion    整个方法执行后(包括异常抛出捕获)<br>基于 HandlerInterceptor接口 实现的样例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CustomHandlerInterceptor</span> <span class="keyword">implements</span> <span class="title">HandlerInterceptor</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(CustomHandlerInterceptor.class);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * Controller方法调用前，返回true表示继续处理</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span></span></span><br><span class="line"><span class="function">            <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        HandlerMethod method = (HandlerMethod) handler;</span><br><span class="line">        logger.info(<span class="string">"CustomerHandlerInterceptor preHandle, &#123;&#125;"</span>, method.getMethod().getName());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * Controller方法调用后，视图渲染前</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">postHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler,</span></span></span><br><span class="line"><span class="function"><span class="params">            ModelAndView modelAndView)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"></span><br><span class="line">        HandlerMethod method = (HandlerMethod) handler;</span><br><span class="line">        logger.info(<span class="string">"CustomerHandlerInterceptor postHandle, &#123;&#125;"</span>, method.getMethod().getName());</span><br><span class="line"></span><br><span class="line">        response.getOutputStream().write(<span class="string">"append content"</span>.getBytes());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * 整个请求处理完，视图已渲染。如果存在异常则Exception不为空</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterCompletion</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)</span></span></span><br><span class="line"><span class="function">            <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"></span><br><span class="line">        HandlerMethod method = (HandlerMethod) handler;</span><br><span class="line">        logger.info(<span class="string">"CustomerHandlerInterceptor afterCompletion, &#123;&#125;"</span>, method.getMethod().getName());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>除了上面的代码实现，还不要忘了将 Interceptor 实现进行注册：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InterceptConfig</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurerAdapter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 注册拦截器</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        registry.addInterceptor(<span class="keyword">new</span> CustomHandlerInterceptor()).addPathPatterns(<span class="string">"/intercept/**"</span>);</span><br><span class="line">        <span class="keyword">super</span>.addInterceptors(registry);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>HandlerInterceptor 来自SpringMVC框架，基本可代替 Filter 接口使用；<br>除了可以方便的进行异常处理之外，通过接口参数能获得Controller方法实例，还可以实现更灵活的定制。</p>
+<h2 id="ExceptionHandler-注解"><a href="#ExceptionHandler-注解" class="headerlink" title="@ExceptionHandler 注解"></a>@ExceptionHandler 注解</h2><p>@ExceptionHandler 的用途是捕获方法执行时抛出的异常，<br>通常可用于捕获全局异常，并输出自定义的结果。</p>
+<p>如下面的实例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ControllerAdvice</span>(assignableTypes = InterceptController.class)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CustomInterceptAdvice</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(CustomInterceptAdvice.class);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 拦截异常</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> e</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> m</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@ExceptionHandler</span>(value = &#123; Exception.class &#125;)</span><br><span class="line">    <span class="meta">@ResponseStatus</span>(HttpStatus.INTERNAL_SERVER_ERROR)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">handle</span><span class="params">(Exception e, HandlerMethod m)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        logger.info(<span class="string">"CustomInterceptAdvice handle exception &#123;&#125;, method: &#123;&#125;"</span>, e.getMessage(), m.getMethod().getName());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> e.getMessage();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>需要注意的是，@ExceptionHandler 需要与 @ControllerAdvice配合使用<br>其中 @ControllerAdvice的 assignableTypes 属性指定了所拦截类的名称。<br>除此之外，该注解还支持指定包扫描范围、注解范围等等。</p>
+<h2 id="RequestBodyAdvice-ResponseBodyAdvice"><a href="#RequestBodyAdvice-ResponseBodyAdvice" class="headerlink" title="RequestBodyAdvice/ResponseBodyAdvice"></a>RequestBodyAdvice/ResponseBodyAdvice</h2><p>RequestBodyAdvice、ResponseBodyAdvice 相对于读者可能比较陌生，<br>而这俩接口也是 Spring 4.x 才开始出现的。</p>
+<p>RequestBodyAdvice 的用法<br>我们都知道，SpringBoot 中可以利用@RequestBody这样的注解完成请求内容体与对象的转换。<br>而RequestBodyAdvice 则可用于在请求内容对象转换的前后时刻进行拦截处理，其定义了几个方法：</p>
+<p>方法    说明<br>supports    判断是否支持<br>handleEmptyBody    当请求体为空时调用<br>beforeBodyRead    在请求体未读取(转换)时调用<br>afterBodyRead    在请求体完成读取后调用<br>实现代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ControllerAdvice</span>(assignableTypes = InterceptController.class)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CustomRequestAdvice</span> <span class="keyword">extends</span> <span class="title">RequestBodyAdviceAdapter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(CustomRequestAdvice.class);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">supports</span><span class="params">(MethodParameter methodParameter, Type targetType,</span></span></span><br><span class="line"><span class="function"><span class="params">            Class&lt;? extends HttpMessageConverter&lt;?&gt;&gt; converterType)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 返回true，表示启动拦截</span></span><br><span class="line">        <span class="keyword">return</span> MsgBody.class.getTypeName().equals(targetType.getTypeName());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">handleEmptyBody</span><span class="params">(Object body, HttpInputMessage inputMessage, MethodParameter parameter,</span></span></span><br><span class="line"><span class="function"><span class="params">            Type targetType, Class&lt;? extends HttpMessageConverter&lt;?&gt;&gt; converterType)</span> </span>&#123;</span><br><span class="line">        logger.info(<span class="string">"CustomRequestAdvice handleEmptyBody"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 对于空请求体，返回对象</span></span><br><span class="line">        <span class="keyword">return</span> body;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> HttpInputMessage <span class="title">beforeBodyRead</span><span class="params">(HttpInputMessage inputMessage, MethodParameter parameter, Type targetType,</span></span></span><br><span class="line"><span class="function"><span class="params">            Class&lt;? extends HttpMessageConverter&lt;?&gt;&gt; converterType)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        logger.info(<span class="string">"CustomRequestAdvice beforeBodyRead"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 可定制消息序列化</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> BodyInputMessage(inputMessage);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">afterBodyRead</span><span class="params">(Object body, HttpInputMessage inputMessage, MethodParameter parameter, Type targetType,</span></span></span><br><span class="line"><span class="function"><span class="params">            Class&lt;? extends HttpMessageConverter&lt;?&gt;&gt; converterType)</span> </span>&#123;</span><br><span class="line">        logger.info(<span class="string">"CustomRequestAdvice afterBodyRead"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 可针对读取后的对象做转换，此处不做处理</span></span><br><span class="line">        <span class="keyword">return</span> body;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>上述代码实现中，针对前面提到的 MsgBody对象类型进行了拦截处理。<br>在beforeBodyRead 中，返回一个BodyInputMessage对象，而这个对象便负责源数据流解析转换</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">BodyInputMessage</span> <span class="keyword">implements</span> <span class="title">HttpInputMessage</span> </span>&#123;</span><br><span class="line">     <span class="keyword">private</span> HttpHeaders headers;</span><br><span class="line">     <span class="keyword">private</span> InputStream body;</span><br><span class="line"></span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="title">BodyInputMessage</span><span class="params">(HttpInputMessage inputMessage)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">         <span class="keyword">this</span>.headers = inputMessage.getHeaders();</span><br><span class="line"></span><br><span class="line">         <span class="comment">// 读取原字符串</span></span><br><span class="line">         String content = IOUtils.toString(inputMessage.getBody(), <span class="string">"UTF-8"</span>);</span><br><span class="line">         MsgBody msg = <span class="keyword">new</span> MsgBody();</span><br><span class="line">         msg.setContent(content);</span><br><span class="line"></span><br><span class="line">         <span class="keyword">this</span>.body = <span class="keyword">new</span> ByteArrayInputStream(JsonUtil.toJson(msg).getBytes());</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="meta">@Override</span></span><br><span class="line">     <span class="function"><span class="keyword">public</span> InputStream <span class="title">getBody</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">         <span class="keyword">return</span> body;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="meta">@Override</span></span><br><span class="line">     <span class="function"><span class="keyword">public</span> HttpHeaders <span class="title">getHeaders</span><span class="params">()</span> </span>&#123;</span><br><span class="line">         <span class="keyword">return</span> headers;</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>代码说明<br>完成数据流的转换，包括以下步骤：</p>
+<p>获取请求内容字符串；<br>构建 MsgBody 对象，将内容字符串作为其 content 字段；<br>将 MsgBody 对象 Json 序列化，再次转成字节流供后续环节使用。<br>ResponseBodyAdvice 用法<br>ResponseBodyAdvice 的用途在于对返回内容做拦截处理，如下面的示例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ControllerAdvice</span>(assignableTypes = InterceptController.class)</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">CustomResponseAdvice</span> <span class="keyword">implements</span> <span class="title">ResponseBodyAdvice</span>&lt;<span class="title">String</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(CustomRequestAdvice.class);</span><br><span class="line"></span><br><span class="line">       <span class="meta">@Override</span></span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">supports</span><span class="params">(MethodParameter returnType, Class&lt;? extends HttpMessageConverter&lt;?&gt;&gt; converterType)</span> </span>&#123;</span><br><span class="line">           <span class="comment">// 返回true，表示启动拦截</span></span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="meta">@Override</span></span><br><span class="line">       <span class="function"><span class="keyword">public</span> String <span class="title">beforeBodyWrite</span><span class="params">(String body, MethodParameter returnType, MediaType selectedContentType,</span></span></span><br><span class="line"><span class="function"><span class="params">               Class&lt;? extends HttpMessageConverter&lt;?&gt;&gt; selectedConverterType, ServerHttpRequest request,</span></span></span><br><span class="line"><span class="function"><span class="params">               ServerHttpResponse response)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">           logger.info(<span class="string">"CustomResponseAdvice beforeBodyWrite"</span>);</span><br><span class="line"></span><br><span class="line">           <span class="comment">// 添加前缀</span></span><br><span class="line">           String raw = String.valueOf(body);</span><br><span class="line">           <span class="keyword">return</span> <span class="string">"PREFIX:"</span> + raw;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>一般在需要对输入输出流进行特殊处理(比如加解密)的场景下使用。</p>
+<h2 id="Aspect-注解"><a href="#Aspect-注解" class="headerlink" title="@Aspect 注解"></a>@Aspect 注解</h2><p>这是目前最灵活的做法，直接利用注解可实现任意对象、方法的拦截。<br>在某个Bean的类上面 @Aspect 注解便可以将一个Bean 声明为具有AOP能力的对象。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InterceptControllerAspect</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(InterceptControllerAspect.class);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Pointcut</span>(<span class="string">"target(org.zales.dmo.boot.controllers.InterceptController)"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">interceptController</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Around</span>(<span class="string">"interceptController()"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">handle</span><span class="params">(ProceedingJoinPoint joinPoint)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line"></span><br><span class="line">        logger.info(<span class="string">"aspect before."</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> joinPoint.proceed();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            logger.info(<span class="string">"aspect after."</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>简单说明</p>
+<p>@Pointcut 用于定义切面点，而使用target关键字可以定位到具体的类。<br>@Around 定义了一个切面处理方法，通过注入ProceedingJoinPoint对象达到控制的目的。</p>
+<p>一些常用的切面注解：</p>
+<p>注解    说明<br>@Before    方法执行之前<br>@After    方法执行之后<br>@Around    方法执行前后<br>@AfterThrowing    抛出异常后<br>@AfterReturing    正常返回后<br>深入一点<br>aop的能力来自于spring-boot-starter-aop，进一步依赖于aspectjweaver组件。<br>有兴趣可以进一步了解。</p>
+<p>推荐指数<br>5颗星，aspectj 与 SpringBoot 可以无缝集成，这是一个经典的AOP框架，<br>可以实现任何你想要的功能，笔者之前曾在多个项目中使用，效果是十分不错的。<br>注解的支持及自动包扫描大大简化了开发，然而，你仍然需要先对 Pointcut 的定义有充分的了解。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">- Filter customFilter handle before</span><br><span class="line">- Filter annotateFilter handle before</span><br><span class="line">- CustomerHandlerInterceptor preHandle, body</span><br><span class="line">- CustomRequestAdvice beforeBodyRead</span><br><span class="line">- CustomRequestAdvice afterBodyRead</span><br><span class="line">- aspect before.</span><br><span class="line">- aspect after.</span><br><span class="line">- CustomResponseAdvice beforeBodyWrite</span><br><span class="line">- CustomerHandlerInterceptor postHandle, body</span><br><span class="line">- CustomerHandlerInterceptor afterCompletion, body</span><br><span class="line">- Filter annotateFilter handle after</span><br><span class="line">- Filter customFilter handle after</span><br></pre></td></tr></table></figure>
+<img src="/2018/11/21/spring/interceptor-order.png" title="interceptor-order.png"> 
+
+      
+    </div>
+    
+    
+    
+</div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/02/windows-server/" rel="next" title="windows-server">
+                <i class="fa fa-chevron-left"></i> windows-server
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/06/systemd/" rel="prev" title="systemd">
+                systemd <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/avatar.png" alt="ziggle">
+            
+              <p class="site-author-name" itemprop="name">ziggle</p>
+              <p class="site-description motion-element" itemprop="description">Hail Hydra !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/youngerier" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#spring-实现拦截的五种姿势"><span class="nav-number">1.</span> <span class="nav-text">spring 实现拦截的五种姿势</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-Filter-接口"><span class="nav-number">1.1.</span> <span class="nav-text">使用 Filter 接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HanlderInterceptor"><span class="nav-number">1.2.</span> <span class="nav-text">HanlderInterceptor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ExceptionHandler-注解"><span class="nav-number">1.3.</span> <span class="nav-text">@ExceptionHandler 注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RequestBodyAdvice-ResponseBodyAdvice"><span class="nav-number">1.4.</span> <span class="nav-text">RequestBodyAdvice/ResponseBodyAdvice</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Aspect-注解"><span class="nav-number">1.5.</span> <span class="nav-text">@Aspect 注解</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ziggle</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info"> Hail Hydra&mdash; </div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

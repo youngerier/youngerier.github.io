@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="ziggle">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ziggle" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="coursor 使用123456789101112131415161718192021222324252627282930PRINT OBJECT_ID(&apos;[dbo].[PROC_checkPlan]&apos;);DECLARE @name VARCHAR(50) -- database name DECLARE @path VARCHAR(256) -- path for backup files DE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sqlserver">
+<meta property="og:url" content="http://yoursite.com/2018/12/14/sqlserver/index.html">
+<meta property="og:site_name" content="ziggle">
+<meta property="og:description" content="coursor 使用123456789101112131415161718192021222324252627282930PRINT OBJECT_ID(&apos;[dbo].[PROC_checkPlan]&apos;);DECLARE @name VARCHAR(50) -- database name DECLARE @path VARCHAR(256) -- path for backup files DE">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2021-05-09T18:27:16.123Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sqlserver">
+<meta name="twitter:description" content="coursor 使用123456789101112131415161718192021222324252627282930PRINT OBJECT_ID(&apos;[dbo].[PROC_checkPlan]&apos;);DECLARE @name VARCHAR(50) -- database name DECLARE @path VARCHAR(256) -- path for backup files DE">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":10,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/12/14/sqlserver/">
+
+
+
+
+
+  <title>sqlserver | ziggle</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ziggle</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Hail Hydra</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        
+          <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/14/sqlserver/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ziggle">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ziggle">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">sqlserver</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-14T11:01:59+00:00">
+                2018-12-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+<div class="semantic">
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="coursor-使用"><a href="#coursor-使用" class="headerlink" title="coursor 使用"></a>coursor 使用</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">PRINT OBJECT_ID('[dbo].[PROC_checkPlan]');</span><br><span class="line"></span><br><span class="line"><span class="keyword">DECLARE</span> @<span class="keyword">name</span> <span class="built_in">VARCHAR</span>(<span class="number">50</span>) <span class="comment">-- database name </span></span><br><span class="line"><span class="keyword">DECLARE</span> @<span class="keyword">path</span> <span class="built_in">VARCHAR</span>(<span class="number">256</span>) <span class="comment">-- path for backup files </span></span><br><span class="line"><span class="keyword">DECLARE</span> @fileName <span class="built_in">VARCHAR</span>(<span class="number">256</span>) <span class="comment">-- filename for backup </span></span><br><span class="line"><span class="keyword">DECLARE</span> @fileDate <span class="built_in">VARCHAR</span>(<span class="number">20</span>) <span class="comment">-- used for file name </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SET</span> @<span class="keyword">path</span> = <span class="string">'C:\sqlbackup\' </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">SELECT @fileDate = CONVERT(VARCHAR(20),GETDATE(),112) </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">DECLARE db_cursor CURSOR FOR </span></span><br><span class="line"><span class="string">SELECT name </span></span><br><span class="line"><span class="string">FROM MASTER.dbo.sysdatabases </span></span><br><span class="line"><span class="string">WHERE name NOT IN ('</span><span class="keyword">master</span><span class="string">','</span><span class="keyword">model</span><span class="string">','</span>msdb<span class="string">','</span>tempdb<span class="string">','</span><span class="keyword">backup</span><span class="string">') </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">OPEN db_cursor  </span></span><br><span class="line"><span class="string">FETCH NEXT FROM db_cursor INTO @name  </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">WHILE @@FETCH_STATUS = 0  </span></span><br><span class="line"><span class="string">BEGIN  </span></span><br><span class="line"><span class="string">      SET @fileName = @path + @name + '</span>_<span class="string">' + @fileDate + '</span>.BAK<span class="string">' </span></span><br><span class="line"><span class="string">      BACKUP DATABASE @name TO DISK = @fileName </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">      FETCH NEXT FROM db_cursor INTO @name </span></span><br><span class="line"><span class="string">END </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">CLOSE db_cursor  </span></span><br><span class="line"><span class="string">DEALLOCATE db_cursor</span></span><br></pre></td></tr></table></figure>
+<h3 id="sqlserver-添加执行权限到用户"><a href="#sqlserver-添加执行权限到用户" class="headerlink" title="sqlserver 添加执行权限到用户"></a>sqlserver 添加执行权限到用户</h3><p>/<em> CREATE A NEW ROLE </em>/<br>CREATE ROLE db_executor</p>
+<p>/<em> GRANT EXECUTE TO THE ROLE </em>/<br>GRANT EXECUTE TO db_executor</p>
+<h3 id="修改表结构-添加默认值"><a href="#修改表结构-添加默认值" class="headerlink" title="修改表结构 / 添加默认值"></a>修改表结构 / 添加默认值</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">update</span> data_terminal <span class="keyword">set</span> message_center_password = <span class="string">''</span> <span class="keyword">where</span> message_center_password <span class="keyword">is</span> <span class="literal">null</span> </span><br><span class="line"></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> data_terminal</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">column</span> [message_center_password] <span class="built_in">varchar</span>(<span class="number">255</span>)  <span class="keyword">not</span> <span class="literal">null</span>  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> data_terminal</span><br><span class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> default_terminal </span><br><span class="line"><span class="keyword">DEFAULT</span> <span class="string">''</span> <span class="keyword">FOR</span> [message_center_password];</span><br></pre></td></tr></table></figure>
+<h3 id="Deleting-all-duplicate-rows-but-keeping-one"><a href="#Deleting-all-duplicate-rows-but-keeping-one" class="headerlink" title="Deleting all duplicate rows but keeping one"></a>Deleting all duplicate rows but keeping one</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">WITH cte AS (</span><br><span class="line">  SELECT[foo], [bar], </span><br><span class="line">     row_number() OVER(PARTITION BY foo, bar ORDER BY baz) AS [rn]</span><br><span class="line">  FROM TABLE</span><br><span class="line">)</span><br><span class="line">DELETE cte WHERE [rn] &gt; 1</span><br></pre></td></tr></table></figure>
+<h3 id="查看sqlserver-索引碎片情况"><a href="#查看sqlserver-索引碎片情况" class="headerlink" title="查看sqlserver 索引碎片情况"></a>查看sqlserver 索引碎片情况</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> OBJECT_NAME(ind.OBJECT_ID) <span class="keyword">AS</span> TableName, </span><br><span class="line">ind.name <span class="keyword">AS</span> IndexName, indexstats.index_type_desc <span class="keyword">AS</span> <span class="keyword">IndexType</span>, </span><br><span class="line">indexstats.avg_fragmentation_in_percent ,</span><br><span class="line"><span class="string">'alter index  '</span> + ind.name + <span class="string">' on '</span> + OBJECT_NAME(ind.OBJECT_ID)+ <span class="string">' rebuild'</span> <span class="keyword">as</span> <span class="keyword">sql</span></span><br><span class="line"><span class="keyword">FROM</span> sys.dm_db_index_physical_stats(DB_ID(), <span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>) indexstats </span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> sys.indexes ind  </span><br><span class="line"><span class="keyword">ON</span> ind.object_id = indexstats.object_id </span><br><span class="line"><span class="keyword">AND</span> ind.index_id = indexstats.index_id </span><br><span class="line"><span class="keyword">WHERE</span> indexstats.avg_fragmentation_in_percent &gt; <span class="number">50</span> </span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> indexstats.avg_fragmentation_in_percent <span class="keyword">DESC</span></span><br></pre></td></tr></table></figure>
+<h3 id="重建索引的方法3"><a href="#重建索引的方法3" class="headerlink" title="重建索引的方法3"></a>重建索引的方法3</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">INDEX</span> [idx_name] <span class="keyword">ON</span> [dbo].[table_name] <span class="keyword">REBUILD</span></span><br></pre></td></tr></table></figure>
+<h3 id="dbcc"><a href="#dbcc" class="headerlink" title="dbcc"></a>dbcc</h3><p>DBCC(<code>database console commands</code>)<br>如果表的当前标识值小于列中存储的最大标识值，则使用标识列中的最大值对其进行重置。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DBCC CHECKIDENT('[dbo].[data_module]', NORESEED)</span><br></pre></td></tr></table></figure></p>
+<h3 id="重置identity种子"><a href="#重置identity种子" class="headerlink" title="重置identity种子"></a>重置identity种子</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> #table_temp (item <span class="built_in">varchar</span>(<span class="number">111</span>))</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> #table_temp (item)</span><br><span class="line"><span class="keyword">select</span> <span class="keyword">name</span> <span class="keyword">from</span> sysobjects  <span class="keyword">where</span> <span class="keyword">type</span> = <span class="string">'u'</span></span><br><span class="line"><span class="keyword">declare</span> @<span class="keyword">count</span> <span class="built_in">int</span> </span><br><span class="line"><span class="keyword">select</span> @<span class="keyword">count</span>= <span class="keyword">count</span>(<span class="number">1</span>) <span class="keyword">from</span> #table_temp</span><br><span class="line"><span class="keyword">declare</span> @i <span class="built_in">varchar</span>(<span class="number">111</span>)</span><br><span class="line"><span class="keyword">while</span> @<span class="keyword">count</span>&gt;<span class="number">0</span></span><br><span class="line"><span class="keyword">begin</span>  </span><br><span class="line">	<span class="keyword">select</span> @<span class="keyword">count</span>= <span class="keyword">count</span>(<span class="number">1</span>) <span class="keyword">from</span> #table_temp</span><br><span class="line">	<span class="keyword">select</span> top(<span class="number">1</span>)@i= item <span class="keyword">from</span> #table_temp</span><br><span class="line">	DBCC CHECKIDENT( @i, RESEED) </span><br><span class="line">  <span class="comment">-- DBCC CHECKIDENT ( table_name, RESEED, new_reseed_value )</span></span><br><span class="line">  <span class="comment">-- DBCC CHECKIDENT ( table_name, RESEED )</span></span><br><span class="line">  <span class="comment">-- DBCC CHECKIDENT ( table_name, NORESEED)</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">delete</span> <span class="keyword">from</span> #table_temp <span class="keyword">where</span> item = @i</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="统计数据库表行数"><a href="#统计数据库表行数" class="headerlink" title="统计数据库表行数"></a>统计数据库表行数</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> t.name, s.row_count <span class="keyword">from</span> sys.tables t</span><br><span class="line"><span class="keyword">JOIN</span> sys.dm_db_partition_stats s</span><br><span class="line"><span class="keyword">ON</span> t.object_id = s.object_id</span><br><span class="line"><span class="keyword">AND</span> t.type_desc = <span class="string">'USER_TABLE'</span></span><br><span class="line"><span class="keyword">AND</span> t.name <span class="keyword">not</span> <span class="keyword">like</span> <span class="string">'%dss%'</span></span><br><span class="line"><span class="keyword">AND</span> s.index_id <span class="keyword">IN</span> (<span class="number">0</span>,<span class="number">1</span>)</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> <span class="keyword">row_count</span> <span class="keyword">desc</span></span><br></pre></td></tr></table></figure>
+<h3 id="批量插入数据时-获取新主键列表"><a href="#批量插入数据时-获取新主键列表" class="headerlink" title="批量插入数据时 获取新主键列表"></a>批量插入数据时 获取新主键列表</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> MyTable</span><br><span class="line">(</span><br><span class="line">    MyPK <span class="built_in">INT</span> <span class="keyword">IDENTITY</span>(<span class="number">1</span>,<span class="number">1</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    MyColumn <span class="keyword">NVARCHAR</span>(<span class="number">1000</span>)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">DECLARE</span> @myNewPKTable <span class="keyword">TABLE</span> (myNewPK <span class="built_in">INT</span>,myColumn <span class="built_in">varchar</span>(<span class="number">1111</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> </span><br><span class="line">    MyTable</span><br><span class="line">(</span><br><span class="line">    MyColumn</span><br><span class="line">)</span><br><span class="line"><span class="keyword">OUTPUT</span> INSERTED.MyPK ,inserted.MyColumn <span class="keyword">INTO</span> @myNewPKTable(myNewPK ,myColumn)</span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    sysobjects.name</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    sysobjects</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> @myNewPKTable</span><br></pre></td></tr></table></figure>
+<h3 id="批量插入数据-并获取插入后表数据"><a href="#批量插入数据-并获取插入后表数据" class="headerlink" title="批量插入数据 并获取插入后表数据"></a>批量插入数据 并获取插入后表数据</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">begin</span> <span class="keyword">transaction</span>;</span><br><span class="line">	<span class="comment">-- 新增联系人</span></span><br><span class="line">	<span class="keyword">insert</span> wx_contact(</span><br><span class="line">				big_head ,</span><br><span class="line">				*</span><br><span class="line">			)  <span class="keyword">output</span> inserted.wx_contact_id, inserted.wx_username </span><br><span class="line">			<span class="keyword">into</span> @TVP(contactId ,wxusername)</span><br><span class="line">	<span class="keyword">select</span> t.bighead,*</span><br><span class="line">	 <span class="keyword">from</span> </span><br><span class="line">	@TVP t </span><br><span class="line">	<span class="keyword">left</span> <span class="keyword">join</span> wx_contact c <span class="keyword">on</span> t.wxusername =c.wx_username</span><br><span class="line">	<span class="keyword">where</span> c.wx_username <span class="keyword">is</span> <span class="literal">null</span> <span class="keyword">and</span> t.userState = <span class="number">0</span></span><br><span class="line"><span class="keyword">commit</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="sqlserver-监控视图"><a href="#sqlserver-监控视图" class="headerlink" title="sqlserver 监控视图"></a>sqlserver 监控视图</h3><ul>
+<li>dm<em>db</em>*：数据库和数据库对象</li>
+<li>dm<em>exec</em>*：执行用户代码和关联的连接</li>
+<li>dm<em>os</em>*：内存、锁定和时间安排</li>
+<li>dm<em>tran</em>*：事务和隔离</li>
+<li>dm<em>io</em>*：网络和磁盘的输入/输出</li>
+</ul>
+<p>显示缓冲计划所占用的cpu使用率</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">      total_cpu_time, </span><br><span class="line">      total_execution_count,</span><br><span class="line">      number_of_statements,</span><br><span class="line">      s2.text</span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">      (<span class="keyword">SELECT</span> TOP <span class="number">50</span> </span><br><span class="line">            <span class="keyword">SUM</span>(qs.total_worker_time) <span class="keyword">AS</span> total_cpu_time, </span><br><span class="line">            <span class="keyword">SUM</span>(qs.execution_count) <span class="keyword">AS</span> total_execution_count,</span><br><span class="line">            <span class="keyword">COUNT</span>(*) <span class="keyword">AS</span>  number_of_statements, </span><br><span class="line">            qs.sql_handle <span class="comment">--,</span></span><br><span class="line">            <span class="comment">--MIN(statement_start_offset) AS statement_start_offset, </span></span><br><span class="line">            <span class="comment">--MAX(statement_end_offset) AS statement_end_offset</span></span><br><span class="line">      <span class="keyword">FROM</span> </span><br><span class="line">            sys.dm_exec_query_stats <span class="keyword">AS</span> qs</span><br><span class="line">      <span class="keyword">GROUP</span> <span class="keyword">BY</span> qs.sql_handle</span><br><span class="line">      <span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">SUM</span>(qs.total_worker_time) <span class="keyword">DESC</span>) <span class="keyword">AS</span> stats</span><br><span class="line">      <span class="keyword">CROSS</span> <span class="keyword">APPLY</span> sys.dm_exec_sql_text(stats.sql_handle) <span class="keyword">AS</span> s2</span><br><span class="line">	  <span class="keyword">order</span> <span class="keyword">by</span> total_execution_count <span class="keyword">desc</span></span><br></pre></td></tr></table></figure>
+<h3 id="sql-join-where-执行顺序"><a href="#sql-join-where-执行顺序" class="headerlink" title="sql join/where 执行顺序"></a>sql join/where 执行顺序</h3><p><code>https://docs.microsoft.com/zh-cn/sql/t-sql/queries/select-transact-sql?view=sql-server-2017</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1. FROM</span><br><span class="line">2. ON</span><br><span class="line">3. JOIN</span><br><span class="line">4. WHERE</span><br><span class="line">5. GROUP BY</span><br><span class="line">6. WITH CUBE or WITH ROLLUP</span><br><span class="line">7. HAVING</span><br><span class="line">8. <span class="keyword">SELECT</span></span><br><span class="line"><span class="number">9.</span> <span class="keyword">DISTINCT</span></span><br><span class="line"><span class="number">10.</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span></span><br><span class="line"><span class="number">11.</span> TOP</span><br></pre></td></tr></table></figure>
+<h3 id="创建链接服务器"><a href="#创建链接服务器" class="headerlink" title="创建链接服务器"></a>创建链接服务器</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 创建链接服务器 */</span></span><br><span class="line">exec sp_addlinkedserver 'srv_lnk','','sqloledb','条码数据库IP地址'</span><br><span class="line">exec sp_addlinkedsrvlogin 'srv_lnk','false',null,'用户名','密码'</span><br><span class="line">go</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 查询示例 */</span></span><br><span class="line"><span class="keyword">SELECT</span> A.ListCode</span><br><span class="line"><span class="keyword">FROM</span> srv_lnk.条码数据库名.dbo.ME_ListCode A, IM_BarLend B</span><br><span class="line"><span class="keyword">WHERE</span> A.ListCode=B.ListCode</span><br><span class="line"><span class="keyword">go</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 删除链接服务器 */</span></span><br><span class="line">exec sp_dropserver <span class="string">'srv_lnk'</span>,<span class="string">'droplogins'</span></span><br></pre></td></tr></table></figure>
+<h4 id="sys-sysprocesses-说明"><a href="#sys-sysprocesses-说明" class="headerlink" title="sys.sysprocesses 说明"></a>sys.sysprocesses 说明</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">spid, <span class="comment">-- sql session id</span></span><br><span class="line">kpid, <span class="comment">-- windows thread id</span></span><br><span class="line">blocked,  <span class="comment">-- 值大于0表示阻塞,  值为本身进程ID表示io操作</span></span><br><span class="line">loginame,</span><br><span class="line">cmd,       <span class="comment">-- 当前正在执行的命令。</span></span><br><span class="line">open_tran, <span class="comment">-- 进程的打开事务数</span></span><br><span class="line"><span class="keyword">status</span>,</span><br><span class="line">program_name,</span><br><span class="line">waittime, <span class="comment">-- (ms)</span></span><br><span class="line">db_name(dbid),</span><br><span class="line">uid,</span><br><span class="line">cpu,</span><br><span class="line">physical_io,</span><br><span class="line">memusage,</span><br><span class="line">login_time,</span><br><span class="line">last_batch,</span><br><span class="line">ecid,</span><br><span class="line">hostname,</span><br><span class="line">hostprocess,</span><br><span class="line">lastwaittype,</span><br><span class="line">waitresource,</span><br><span class="line">net_address,</span><br><span class="line">net_library,</span><br><span class="line">stmt_start,</span><br><span class="line">stmt_end,</span><br><span class="line">request_id</span><br><span class="line"><span class="keyword">FROM</span> sys.sysprocesses <span class="keyword">WHERE</span>  spid &gt; <span class="number">50</span></span><br></pre></td></tr></table></figure>
+<h4 id="sqlserver-schema"><a href="#sqlserver-schema" class="headerlink" title="sqlserver schema"></a>sqlserver schema</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 完全限定的对象名称现在包含四部分：server.database.schema.object</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="keyword">test</span> </span><br><span class="line"><span class="keyword">go</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">schema</span> myschema</span><br><span class="line"><span class="keyword">go</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">schema</span> myschema</span><br><span class="line"><span class="keyword">go</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">schema</span> myschema transfer dbo.Mytable</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> myschema.TestTb(</span><br><span class="line">    <span class="keyword">id</span> <span class="built_in">bigint</span> <span class="keyword">not</span> <span class="literal">null</span> <span class="keyword">identity</span>(<span class="number">1</span>,<span class="number">1</span>) ,</span><br><span class="line">    customer_name <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">not</span> <span class="literal">null</span> <span class="keyword">default</span>(<span class="string">''</span>),</span><br><span class="line">    created_time datetime <span class="keyword">not</span> <span class="literal">null</span> <span class="keyword">default</span> <span class="keyword">getdate</span>()</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 数据库锁定/block情况</span></span><br><span class="line"><span class="keyword">Select</span> * <span class="keyword">From</span> master.sys.sysprocesses <span class="keyword">Where</span> Blocked &lt;&gt; <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<h4 id="以下示例为-SQL-Server-实例中的每个数据库返回后台队列中活动异步作业的数量。"><a href="#以下示例为-SQL-Server-实例中的每个数据库返回后台队列中活动异步作业的数量。" class="headerlink" title="以下示例为 SQL Server 实例中的每个数据库返回后台队列中活动异步作业的数量。"></a>以下示例为 SQL Server 实例中的每个数据库返回后台队列中活动异步作业的数量。</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> DB_NAME(database_id) <span class="keyword">AS</span> [<span class="keyword">Database</span>], <span class="keyword">COUNT</span>(*) <span class="keyword">AS</span> [Active Async Jobs]  </span><br><span class="line"><span class="keyword">FROM</span> sys.dm_exec_background_job_queue  </span><br><span class="line"><span class="keyword">WHERE</span> in_progress = <span class="number">1</span>  </span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> database_id;  </span><br><span class="line">GO</span><br></pre></td></tr></table></figure>
+<h4 id="收集查询自有连接有关信息的典型查询。"><a href="#收集查询自有连接有关信息的典型查询。" class="headerlink" title="收集查询自有连接有关信息的典型查询。"></a>收集查询自有连接有关信息的典型查询。</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span>   </span><br><span class="line">    c.session_id, c.net_transport, c.encrypt_option,   </span><br><span class="line">    c.auth_scheme, s.host_name, s.program_name,   </span><br><span class="line">    s.client_interface_name, s.login_name, s.nt_domain,   </span><br><span class="line">    s.nt_user_name, s.original_login_name, c.connect_time,   </span><br><span class="line">    s.login_time   </span><br><span class="line"><span class="keyword">FROM</span> sys.dm_exec_connections <span class="keyword">AS</span> c  </span><br><span class="line"><span class="keyword">JOIN</span> sys.dm_exec_sessions <span class="keyword">AS</span> s  </span><br><span class="line">    <span class="keyword">ON</span> c.session_id = s.session_id  </span><br><span class="line"><span class="keyword">WHERE</span> c.session_id = @@SPID;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+</div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/12/jvm-memory-model/" rel="next" title="jvm">
+                <i class="fa fa-chevron-left"></i> jvm
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/21/how-to-create-spring-boot-starter/" rel="prev" title="how-to-create-spring-boot-starter">
+                how-to-create-spring-boot-starter <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/avatar.png" alt="ziggle">
+            
+              <p class="site-author-name" itemprop="name">ziggle</p>
+              <p class="site-description motion-element" itemprop="description">Hail Hydra !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/youngerier" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#coursor-使用"><span class="nav-number">1.</span> <span class="nav-text">coursor 使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sqlserver-添加执行权限到用户"><span class="nav-number">2.</span> <span class="nav-text">sqlserver 添加执行权限到用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改表结构-添加默认值"><span class="nav-number">3.</span> <span class="nav-text">修改表结构 / 添加默认值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deleting-all-duplicate-rows-but-keeping-one"><span class="nav-number">4.</span> <span class="nav-text">Deleting all duplicate rows but keeping one</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看sqlserver-索引碎片情况"><span class="nav-number">5.</span> <span class="nav-text">查看sqlserver 索引碎片情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重建索引的方法3"><span class="nav-number">6.</span> <span class="nav-text">重建索引的方法3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dbcc"><span class="nav-number">7.</span> <span class="nav-text">dbcc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重置identity种子"><span class="nav-number">8.</span> <span class="nav-text">重置identity种子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#统计数据库表行数"><span class="nav-number">9.</span> <span class="nav-text">统计数据库表行数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#批量插入数据时-获取新主键列表"><span class="nav-number">10.</span> <span class="nav-text">批量插入数据时 获取新主键列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#批量插入数据-并获取插入后表数据"><span class="nav-number">11.</span> <span class="nav-text">批量插入数据 并获取插入后表数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sqlserver-监控视图"><span class="nav-number">12.</span> <span class="nav-text">sqlserver 监控视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sql-join-where-执行顺序"><span class="nav-number">13.</span> <span class="nav-text">sql join/where 执行顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建链接服务器"><span class="nav-number">14.</span> <span class="nav-text">创建链接服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#sys-sysprocesses-说明"><span class="nav-number">14.1.</span> <span class="nav-text">sys.sysprocesses 说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sqlserver-schema"><span class="nav-number">14.2.</span> <span class="nav-text">sqlserver schema</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#以下示例为-SQL-Server-实例中的每个数据库返回后台队列中活动异步作业的数量。"><span class="nav-number">14.3.</span> <span class="nav-text">以下示例为 SQL Server 实例中的每个数据库返回后台队列中活动异步作业的数量。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#收集查询自有连接有关信息的典型查询。"><span class="nav-number">14.4.</span> <span class="nav-text">收集查询自有连接有关信息的典型查询。</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ziggle</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info"> Hail Hydra&mdash; </div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

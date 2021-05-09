@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="ziggle">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ziggle" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="Class.forName() 返回一个类JVM会加载制定的类,并执行类的静态代码段 A a = (A)Class.forName(“pacage.A”).newInstance();A a = new A()通过包名和类名,实例对象 String className = readfromXMLConfig;class c = Class.forName(className);factory =">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java-basic">
+<meta property="og:url" content="http://yoursite.com/2017/12/15/java-basic/index.html">
+<meta property="og:site_name" content="ziggle">
+<meta property="og:description" content="Class.forName() 返回一个类JVM会加载制定的类,并执行类的静态代码段 A a = (A)Class.forName(“pacage.A”).newInstance();A a = new A()通过包名和类名,实例对象 String className = readfromXMLConfig;class c = Class.forName(className);factory =">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2017/12/15/java-basic/hash1.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/15/java-basic/hash2.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/15/java-basic/hash3.png">
+<meta property="og:updated_time" content="2021-05-09T18:27:16.087Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java-basic">
+<meta name="twitter:description" content="Class.forName() 返回一个类JVM会加载制定的类,并执行类的静态代码段 A a = (A)Class.forName(“pacage.A”).newInstance();A a = new A()通过包名和类名,实例对象 String className = readfromXMLConfig;class c = Class.forName(className);factory =">
+<meta name="twitter:image" content="http://yoursite.com/2017/12/15/java-basic/hash1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":10,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/12/15/java-basic/">
+
+
+
+
+
+  <title>java-basic | ziggle</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ziggle</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Hail Hydra</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        
+          <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/15/java-basic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ziggle">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ziggle">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">java-basic</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-15T10:19:56+00:00">
+                2017-12-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+<div class="semantic">
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Class.forName() 返回一个类JVM会加载制定的类,并执行类的静态代码段</p>
+<p>A a = (A)Class.forName(“pacage.A”).newInstance();<br>A a = new A()<br>通过包名和类名,实例对象</p>
+<p>String className = readfromXMLConfig;<br>class c = Class.forName(className);<br>factory = (Exampleinterface)c.newInstence();</p>
+<blockquote>
+<p>使用newInstance() 要保证:</p>
+<ul>
+<li>类已经加载</li>
+<li>类已经连接</li>
+</ul>
+</blockquote>
+<p>使用Class类的静态方法forName 完成这两步</p>
+<ul>
+<li>newInstance(): 弱类型,低效率,只能调用无参构造。</li>
+<li>new: 强类型,相对高效,能调用任何public构造。</li>
+<li>Class.forName(“”)返回的是类。</li>
+<li>Class.forName(“”).newInstance()返回的是object 。<h2 id="ReentrantLock"><a href="#ReentrantLock" class="headerlink" title="ReentrantLock"></a>ReentrantLock</h2>ReentrantLock是一个基于AQS的可重入的互斥锁，<br>公平锁将确保等待时间最长的线程优先获取锁，将会使整体的吞吐量下降<br>非公平锁将不能确定哪一个线程将获取锁，可能会导致某些线程饥饿。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReentrantLockTest</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ReentrantLock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        lock.lock();  <span class="comment">// block until condition holds</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// ... method body</span></span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="java-静态代理"><a href="#java-静态代理" class="headerlink" title="java 静态代理"></a>java 静态代理</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationHandler;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Proxy;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProxyDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//1.创建委托对象</span></span><br><span class="line">        AbsSubject real = <span class="keyword">new</span> RealSub();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//2.创建调用处理器对象</span></span><br><span class="line">        ProxyHandler handler = <span class="keyword">new</span> ProxyHandler(real);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//3.动态生成代理对象</span></span><br><span class="line">        AbsSubject proxySub = (AbsSubject)Proxy.newProxyInstance(real.getClass().getClassLoader(),</span><br><span class="line">                real.getClass().getInterfaces(), handler);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//4.通过代理对象调用方法</span></span><br><span class="line">        proxySub.doJob();</span><br><span class="line">        proxySub.sum(<span class="number">3</span>,  <span class="number">9</span>);</span><br><span class="line">        <span class="keyword">int</span> m = proxySub.multiply(<span class="number">3</span>, <span class="number">7</span>);</span><br><span class="line">        System.out.println(<span class="string">"multiply result is:"</span>+m);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//被代理类的接口</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">AbsSubject</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">doJob</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">multiply</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//实际的被代理类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RealSub</span> <span class="keyword">implements</span> <span class="title">AbsSubject</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doJob</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">        System.out.println(<span class="string">"i am doing something"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">        System.out.println(a+<span class="string">" + "</span>+b+<span class="string">" = "</span>+(a+b));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">multiply</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">        System.out.println(a+<span class="string">" * "</span>+ b);</span><br><span class="line">        <span class="keyword">return</span> a*b;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//动态代理的内部实现,调用处理器类，即实现 InvocationHandler 接口</span></span><br><span class="line"><span class="comment">//这个类的目的是指定运行时将生成的代理类需要完成的具体任务（包括Preprocess和Postprocess）</span></span><br><span class="line"><span class="comment">//即代理类调用任何方法都会经过这个调用处理器类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ProxyHandler</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Object realSub;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ProxyHandler</span><span class="params">(Object object)</span> </span>&#123;</span><br><span class="line">        realSub = object;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"before"</span>);</span><br><span class="line">        Object res = method.invoke(realSub, args);</span><br><span class="line">        System.out.println(<span class="string">"after"</span>);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="Stream-Java-8"><a href="#Stream-Java-8" class="headerlink" title="Stream(Java 8)"></a>Stream(Java 8)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; lists =Arrays.asList(<span class="string">"a"</span>,<span class="string">"b"</span>,<span class="string">"c"</span>);</span><br><span class="line">Stream&lt;String&gt; streamList  = lists.stream();</span><br><span class="line">lists = streamList.distinct().finter(str-&gt;!str.equals(<span class="string">"a"</span>).sorted(String::CompareTo).collect(ollectors.toList());</span><br><span class="line">lists.forEach(System.out::println);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>创建Stream</p>
+<ul>
+<li>集合 Stream: stream()</li>
+<li>数组</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//lambda</span></span><br><span class="line">Collections.sort(strList, (s1, s2)-&gt;s1.compareTo(s2));</span><br><span class="line"><span class="comment">//方法引用</span></span><br><span class="line">Collections.sort(strList, String::compareTo);</span><br><span class="line"><span class="comment">//lambda</span></span><br><span class="line">strList.forEach(x-&gt;System.out.println(x));</span><br><span class="line"><span class="comment">//方法引用</span></span><br><span class="line">strList.forEach(System.out::println);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>方法引用的语法<ul>
+<li>对象::实例方法=&gt;等价于”提供方法参数的lambda表达式”</li>
+<li>类::静态方法=&gt;等价于”提供方法参数的lambda表达式”<ul>
+<li>eg. System.out::println等价于x-&gt;System.out.println(x)</li>
+</ul>
+</li>
+<li>类::实例方法=&gt;第一个参数是执行方法的对象<ul>
+<li>eg. String::compareTo等价于(s1, s2)-&gt;s1.compareTo(s2)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="aop"><a href="#aop" class="headerlink" title="aop"></a>aop</h3><blockquote>
+<p>使用场景<br>Authentication 权限</p>
+</blockquote>
+<p>Caching 缓存</p>
+<p>Context passing 内容传递</p>
+<p>Error handling 错误处理</p>
+<p>Lazy loading　懒加载</p>
+<p>Debugging　　调试</p>
+<p>logging, tracing, profiling and monitoring　记录跟踪　优化　校准</p>
+<p>Performance optimization　性能优化</p>
+<p>Persistence　　持久化</p>
+<p>Resource pooling　资源池</p>
+<p>Synchronization　同步</p>
+<p>Transactions 事务</p>
+<blockquote>
+<p>AOP相关概念<br>方面（Aspect）：一个关注点的模块化，这个关注点实现可能另外横切多个对象。事务管理是J2EE应用中一个很好的横切关注点例子。方面用spring的 Advisor或拦截器实现。</p>
+</blockquote>
+<p>连接点（Joinpoint）: 程序执行过程中明确的点，如方法的调用或特定的异常被抛出。</p>
+<p>通知（Advice）: 在特定的连接点，AOP框架执行的动作。各种类型的通知包括“around”、“before”和“throws”通知。通知类型将在下面讨论。许多AOP框架包括Spring都是以拦截器做通知模型，维护一个“围绕”连接点的拦截器链。Spring中定义了四个advice: BeforeAdvice, AfterAdvice, ThrowAdvice和DynamicIntroductionAdvice</p>
+<p>切入点（Pointcut）: 指定一个通知将被引发的一系列连接点的集合。AOP框架必须允许开发者指定切入点：例如，使用正则表达式。 Spring定义了Pointcut接口，用来组合MethodMatcher和ClassFilter，可以通过名字很清楚的理解， MethodMatcher是用来检查目标类的方法是否可以被应用此通知，而ClassFilter是用来检查Pointcut是否应该应用到目标类上</p>
+<p>引入（Introduction）: 添加方法或字段到被通知的类。 Spring允许引入新的接口到任何被通知的对象。例如，你可以使用一个引入使任何对象实现 IsModified接口，来简化缓存。Spring中要使用Introduction, 可有通过DelegatingIntroductionInterceptor来实现通知，通过DefaultIntroductionAdvisor来配置Advice和代理类要实现的接口</p>
+<p>目标对象（Target Object）: 包含连接点的对象。也被称作被通知或被代理对象。POJO</p>
+<p>AOP代理（AOP Proxy）: AOP框架创建的对象，包含通知。 在Spring中，AOP代理可以是JDK动态代理或者CGLIB代理。</p>
+<p>织入（Weaving）: 组装方面来创建一个被通知对象。这可以在编译时完成（例如使用AspectJ编译器），也可以在运行时完成。Spring和其他纯Java AOP框架一样，在运行时完成织入。</p>
+<p>Spring提供了两种方式来生成代理对象: JDKProxy和Cglib，具体使用哪种方式生成由AopProxyFactory根据AdvisedSupport对象的配置来决定。默认的策略是如果目标类是接口，则使用JDK动态代理技术，否则使用Cglib来生成代理。下面我们来研究一下Spring如何使用JDK来生成代理对象，具体的生成代码放在JdkDynamicAopProxy这个类中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">修饰符介绍</span><br><span class="line">Java修饰符主要分为两类:</span><br><span class="line"></span><br><span class="line">访问修饰符</span><br><span class="line">非访问修饰符</span><br><span class="line">其中访问修饰符主要包括 private、default、protected、public。</span><br><span class="line">非访问修饰符主要包括 static、final、abstract、synchronized。</span><br><span class="line"></span><br><span class="line">访问修饰符</span><br><span class="line">访问修饰符可以使用下图这张表来说明访问权限:</span><br><span class="line"></span><br><span class="line">修饰符	当前类	同一包内	子类	其它包</span><br><span class="line">public	Y	Y	Y	Y</span><br><span class="line">protected	Y	Y	Y	N</span><br><span class="line">default	Y	Y	N	N</span><br><span class="line">private	Y	N	N	N</span><br><span class="line">简单点查看访问级别的话，级别是由低到高。</span><br><span class="line"></span><br><span class="line"> private＜default＜protected＜public</span><br></pre></td></tr></table></figure>
+<hr>
+<p>title: java-basic<br>date: 2017-12-15 10:19:56</p>
+<h2 id="tags"><a href="#tags" class="headerlink" title="tags:"></a>tags:</h2><p>Class.forName() 返回一个类JVM会加载制定的类,并执行类的静态代码段</p>
+<p>A a = (A)Class.forName(“pacage.A”).newInstance();<br>A a = new A()<br>通过包名和类名,实例对象</p>
+<p>String className = readfromXMLConfig;<br>class c = Class.forName(className);<br>factory = (Exampleinterface)c.newInstence();</p>
+<blockquote>
+<p>使用newInstance() 要保证:</p>
+<ul>
+<li>类已经加载</li>
+<li>类已经连接</li>
+</ul>
+</blockquote>
+<p>使用Class类的静态方法forName 完成这两步</p>
+<ul>
+<li>newInstance(): 弱类型,低效率,只能调用无参构造。</li>
+<li>new: 强类型,相对高效,能调用任何public构造。</li>
+<li>Class.forName(“”)返回的是类。</li>
+<li>Class.forName(“”).newInstance()返回的是object 。<h3 id="ReentrantLock-1"><a href="#ReentrantLock-1" class="headerlink" title="ReentrantLock"></a>ReentrantLock</h3>ReentrantLock是一个基于AQS的可重入的互斥锁，<br>公平锁将确保等待时间最长的线程优先获取锁，将会使整体的吞吐量下降<br>非公平锁将不能确定哪一个线程将获取锁，可能会导致某些线程饥饿。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReentrantLockTest</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ReentrantLock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        lock.lock();  <span class="comment">// block until condition holds</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// ... method body</span></span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="java-静态代理-1"><a href="#java-静态代理-1" class="headerlink" title="java 静态代理"></a>java 静态代理</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationHandler;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Proxy;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProxyDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//1.创建委托对象</span></span><br><span class="line">        AbsSubject real = <span class="keyword">new</span> RealSub();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//2.创建调用处理器对象</span></span><br><span class="line">        ProxyHandler handler = <span class="keyword">new</span> ProxyHandler(real);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//3.动态生成代理对象</span></span><br><span class="line">        AbsSubject proxySub = (AbsSubject)Proxy.newProxyInstance(real.getClass().getClassLoader(),</span><br><span class="line">                real.getClass().getInterfaces(), handler);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//4.通过代理对象调用方法</span></span><br><span class="line">        proxySub.doJob();</span><br><span class="line">        proxySub.sum(<span class="number">3</span>,  <span class="number">9</span>);</span><br><span class="line">        <span class="keyword">int</span> m = proxySub.multiply(<span class="number">3</span>, <span class="number">7</span>);</span><br><span class="line">        System.out.println(<span class="string">"multiply result is:"</span>+m);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//被代理类的接口</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">AbsSubject</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">doJob</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">multiply</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//实际的被代理类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RealSub</span> <span class="keyword">implements</span> <span class="title">AbsSubject</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doJob</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">        System.out.println(<span class="string">"i am doing something"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">        System.out.println(a+<span class="string">" + "</span>+b+<span class="string">" = "</span>+(a+b));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">multiply</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">        System.out.println(a+<span class="string">" * "</span>+ b);</span><br><span class="line">        <span class="keyword">return</span> a*b;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//动态代理的内部实现,调用处理器类，即实现 InvocationHandler 接口</span></span><br><span class="line"><span class="comment">//这个类的目的是指定运行时将生成的代理类需要完成的具体任务（包括Preprocess和Postprocess）</span></span><br><span class="line"><span class="comment">//即代理类调用任何方法都会经过这个调用处理器类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ProxyHandler</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Object realSub;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ProxyHandler</span><span class="params">(Object object)</span> </span>&#123;</span><br><span class="line">        realSub = object;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"before"</span>);</span><br><span class="line">        Object res = method.invoke(realSub, args);</span><br><span class="line">        System.out.println(<span class="string">"after"</span>);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Stream-Java-8-1"><a href="#Stream-Java-8-1" class="headerlink" title="Stream(Java 8)"></a>Stream(Java 8)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; lists =Arrays.asList(<span class="string">"a"</span>,<span class="string">"b"</span>,<span class="string">"c"</span>);</span><br><span class="line">Stream&lt;String&gt; streamList  = lists.stream();</span><br><span class="line">lists = streamList.distinct().finter(str-&gt;!str.equals(<span class="string">"a"</span>).sorted(String::CompareTo).collect(ollectors.toList());</span><br><span class="line">lists.forEach(System.out::println);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>创建Stream</p>
+<ul>
+<li>集合 Stream: stream()</li>
+<li>数组</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//lambda</span></span><br><span class="line">Collections.sort(strList, (s1, s2)-&gt;s1.compareTo(s2));</span><br><span class="line"><span class="comment">//方法引用</span></span><br><span class="line">Collections.sort(strList, String::compareTo);</span><br><span class="line"><span class="comment">//lambda</span></span><br><span class="line">strList.forEach(x-&gt;System.out.println(x));</span><br><span class="line"><span class="comment">//方法引用</span></span><br><span class="line">strList.forEach(System.out::println);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>方法引用的语法<ul>
+<li>对象::实例方法=&gt;等价于”提供方法参数的lambda表达式”</li>
+<li>类::静态方法=&gt;等价于”提供方法参数的lambda表达式”<ul>
+<li>eg. System.out::println等价于x-&gt;System.out.println(x)</li>
+</ul>
+</li>
+<li>类::实例方法=&gt;第一个参数是执行方法的对象<ul>
+<li>eg. String::compareTo等价于(s1, s2)-&gt;s1.compareTo(s2)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="aop-1"><a href="#aop-1" class="headerlink" title="aop"></a>aop</h3><blockquote>
+<p>使用场景<br>Authentication 权限<br>Caching 缓存<br>Context passing 内容传递<br>Error handling 错误处理<br>Lazy loading　懒加载<br>Debugging　　调试<br>logging, tracing, profiling and monitoring　记录跟踪　优化　校准<br>Performance optimization　性能优化<br>Persistence　　持久化<br>Resource pooling　资源池<br>Synchronization　同步<br>Transactions 事务</p>
+<p>AOP相关概念<br>方面（Aspect）：一个关注点的模块化，这个关注点实现可能另外横切多个对象。事务管理是J2EE应用中一个很好的横切关注点例子。方面用spring的 Advisor或拦截器实现。</p>
+</blockquote>
+<p>连接点（Joinpoint）: 程序执行过程中明确的点，如方法的调用或特定的异常被抛出。</p>
+<p>通知（Advice）: 在特定的连接点，AOP框架执行的动作。各种类型的通知包括“around”、“before”和“throws”通知。通知类型将在下面讨论。许多AOP框架包括Spring都是以拦截器做通知模型，维护一个“围绕”连接点的拦截器链。Spring中定义了四个advice: BeforeAdvice, AfterAdvice, ThrowAdvice和DynamicIntroductionAdvice</p>
+<p>切入点（Pointcut）: 指定一个通知将被引发的一系列连接点的集合。AOP框架必须允许开发者指定切入点：例如，使用正则表达式。 Spring定义了Pointcut接口，用来组合MethodMatcher和ClassFilter，可以通过名字很清楚的理解， MethodMatcher是用来检查目标类的方法是否可以被应用此通知，而ClassFilter是用来检查Pointcut是否应该应用到目标类上</p>
+<p>引入（Introduction）: 添加方法或字段到被通知的类。 Spring允许引入新的接口到任何被通知的对象。例如，你可以使用一个引入使任何对象实现 IsModified接口，来简化缓存。Spring中要使用Introduction, 可有通过DelegatingIntroductionInterceptor来实现通知，通过DefaultIntroductionAdvisor来配置Advice和代理类要实现的接口</p>
+<p>目标对象（Target Object）: 包含连接点的对象。也被称作被通知或被代理对象。POJO</p>
+<p>AOP代理（AOP Proxy）: AOP框架创建的对象，包含通知。 在Spring中，AOP代理可以是JDK动态代理或者CGLIB代理。</p>
+<p>织入（Weaving）: 组装方面来创建一个被通知对象。这可以在编译时完成（例如使用AspectJ编译器），也可以在运行时完成。Spring和其他纯Java AOP框架一样，在运行时完成织入。</p>
+<p>Spring提供了两种方式来生成代理对象: JDKProxy和Cglib，具体使用哪种方式生成由AopProxyFactory根据AdvisedSupport对象的配置来决定。默认的策略是如果目标类是接口，则使用JDK动态代理技术，否则使用Cglib来生成代理。下面我们来研究一下Spring如何使用JDK来生成代理对象，具体的生成代码放在JdkDynamicAopProxy这个类中</p>
+<p>private static void demo2() {<br>    Thread A = new Thread(new Runnable() {<br>        @Override<br>        public void run() {<br>            printNumber(“A”);<br>        }<br>    });<br>    Thread B = new Thread(new Runnable() {<br>        @Override<br>        public void run() {<br>            System.out.println(“B 开始等待 A”);<br>            try {<br>                A.join();<br>            } catch (InterruptedException e) {<br>                e.printStackTrace();<br>            }<br>            printNumber(“B”);<br>        }<br>    });<br>    B.start();<br>    A.start();<br>}<br>得到的结果如下：</p>
+<p>B 开始等待 A<br>A print: 1<br>A print: 2<br>A print: 3</p>
+<p>B print: 1<br>B print: 2<br>B print: 3<br>所以我们能看到 A.join() 方法会让 B 一直等待直到 A 运行完毕。</p>
+<h3 id="为什么hashmap中数组的长的是16-或2的n次幂"><a href="#为什么hashmap中数组的长的是16-或2的n次幂" class="headerlink" title="为什么hashmap中数组的长的是16 或2的n次幂"></a>为什么hashmap中数组的长的是16 或2的n次幂</h3><p>我们假设HaspMap的初始长度为10，重复前面的运算步骤：</p>
+<img src="/2017/12/15/java-basic/hash1.png" title="hash1">
+<p>单独看这个结果，表面上并没有问题。我们再来尝试一个新的HashCode 101110001110101110 1011 ：<br><img src="/2017/12/15/java-basic/hash2.png" title="hash2"><br>然后我们再换一个HashCode 101110001110101110 1111 试试 ：<br><img src="/2017/12/15/java-basic/hash3.png" title="hash3"></p>
+<p>这样我们可以看到，虽然HashCode的倒数第二第三位从0变成了1，但是运算的结果都是1001。也就是说，当HashMap长度为10的时候，有些index结果的出现几率会更大，而有些index结果永远不会出现（比如0111）！</p>
+<p>所以这样显然不符合Hash算法均匀分布的原则。</p>
+<p>而长度是16或者其他2的次幂，Length - 1的值的所有二进制位全为1（如15的二进制是1111，31的二进制为11111），这种情况下，index的结果就等同于HashCode后几位的值。只要输入的HashCode本身分布均匀，Hash算法的结果就是均匀的。这也是HashMap设计的玄妙之处。</p>
+<h3 id="HashMap的死锁"><a href="#HashMap的死锁" class="headerlink" title="HashMap的死锁"></a>HashMap的死锁</h3><p>我们知道HashMap是非线程安全的，那么原因是什么呢？</p>
+<p>由于HashMap的容量是有限的，如果HashMap中的数组的容量很小，假如只有2个，那么如果要放进10个keys的话，碰撞就会非常频繁，此时一个O(1)的查找算法，就变成了链表遍历，性能变成了O(n)，这是Hash表的缺陷。</p>
+<p>为了解决这个问题,HashMap设计了一个阈值，其值为容量的0.75，当HashMap所用容量超过了阈值后，就会自动扩充其容量。</p>
+<p>在多线程的情况下，当重新调整HashMap大小的时候，就会存在条件竞争，因为如果两个线程都发现HashMap需要重新调整大小了，它们会同时试着调整大小。在调整大小的过程中，存储在链表中的元素的次序会反过来，因为移动到新的bucket位置的时候，HashMap并不会将元素放在链表的尾部，而是放在头部，这是为了避免尾部遍历。如果条件竞争发生了，那么就会产生死循环了。</p>
+<h3 id="java-编译参数"><a href="#java-编译参数" class="headerlink" title="java 编译参数"></a>java 编译参数</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javac -encoding utf-8 ./a.java</span><br></pre></td></tr></table></figure>
+<h3 id="Arthas"><a href="#Arthas" class="headerlink" title="Arthas"></a>Arthas</h3><p> 原文连接 <code>https://alibaba.github.io/arthas/arthas-tutorials?language=cn&amp;id=arthas-advanced</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">watch com.example.demo.arthas.user.UserController * &apos;&#123;params, throwExp&#125;&apos; -x 2</span><br></pre></td></tr></table></figure>
+<ul>
+<li>第一个参数是类名，支持通配</li>
+<li>第二个参数是函数名，支持通配</li>
+<li>第三个参数是 返回值 ognl </li>
+<li>第四个参数是 命令支持在第4个参数里写条件表达式 <code>watch com.example.demo.arthas.user.UserController * returnObj &#39;params[0] &gt; 100&#39;</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">`loader`</span><br><span class="line">`clazz`</span><br><span class="line">`method`</span><br><span class="line">`target`</span><br><span class="line">`params`</span><br><span class="line">`returnObj`</span><br><span class="line">`throwExp`</span><br><span class="line">`isBefore`</span><br><span class="line">`isThrow`</span><br><span class="line">`isReturn`</span><br></pre></td></tr></table></figure>
+<h4 id="热更新代码"><a href="#热更新代码" class="headerlink" title="热更新代码"></a>热更新代码</h4><p>下面介绍通过jad/mc/redefine 命令实现动态更新代码的功能。</p>
+<p>目前，访问 <code>http://localhost/user/0</code> ，会返回<code>500</code>异常：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl http://localhost/user/0</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"timestamp"</span>:<span class="number">1550223186170</span>,<span class="attr">"status"</span>:<span class="number">500</span>,<span class="attr">"error"</span>:<span class="string">"Internal Server Error"</span>,<span class="attr">"exception"</span>:<span class="string">"java.lang.IllegalArgumentException"</span>,<span class="attr">"message"</span>:<span class="string">"id &lt; 1"</span>,<span class="attr">"path"</span>:<span class="string">"/user/0"</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>下面通过热更新代码，修改这个逻辑。</p>
+<p>jad反编译UserController<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jad --source-only com.example.demo.arthas.user.UserController &gt; /tmp/UserController.java</span><br></pre></td></tr></table></figure></p>
+<p>jad反编译的结果保存在 /tmp/UserController.java文件里了。</p>
+<p>再打开一个Terminal 3，然后用vim来编辑/tmp/UserController.java：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /tmp/UserController.java</span><br></pre></td></tr></table></figure></p>
+<p>比如当 user id 小于1时，也正常返回，不抛出异常：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping</span>(value=&#123;<span class="string">"/user/&#123;id&#125;"</span>&#125;)</span><br><span class="line"><span class="function"><span class="keyword">public</span> User <span class="title">findUserById</span><span class="params">(@PathVariable Integer id)</span> </span>&#123;</span><br><span class="line">    logger.info(<span class="string">"id: &#123;&#125;"</span>, (Object)id);</span><br><span class="line">    <span class="keyword">if</span> (id != <span class="keyword">null</span> &amp;&amp; id &lt; <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> User(id, <span class="string">"name"</span> + id);</span><br><span class="line">        <span class="comment">// throw new IllegalArgumentException("id &lt; 1");</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> User(id.intValue(), <span class="string">"name"</span> + id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>sc查找加载UserController的ClassLoader</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc -d *UserController | grep classLoaderHash</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sc -d *UserController | grep classLoaderHash</span><br></pre></td></tr></table></figure>
+<p> classLoaderHash   1be6f5c3<br>可以发现是 spring boot LaunchedURLClassLoader@1be6f5c3 加载的。</p>
+<ul>
+<li>mc</li>
+</ul>
+<p>保存好/tmp/UserController.java之后，使用mc(Memory Compiler)命令来编译，并且通过-c参数指定ClassLoader：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mc -c 1be6f5c3 /tmp/UserController.java -d /tmp</span><br></pre></td></tr></table></figure>
+<p>$ mc -c 1be6f5c3 /tmp/UserController.java -d /tmp</p>
+<p>Memory compiler output:<br>/tmp/com/example/demo/arthas/user/UserController.class<br>Affect(row-cnt:1) cost in 346 ms</p>
+<ul>
+<li>redefine</li>
+</ul>
+<p>再使用redefine命令重新加载新编译好的UserController.class：</p>
+<p>redefine /tmp/com/example/demo/arthas/user/UserController.class</p>
+<p>$ redefine /tmp/com/example/demo/arthas/user/UserController.class<br>redefine success, size: 1</p>
+<p>热修改代码结果<br>redefine成功之后，再次访问 <code>curl http://localhost/user/0</code> ，结果是：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"id"</span>: <span class="number">0</span>,</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"name0"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">因为static类型的属性会在类被加载之后被初始化，我们在深度分析Java的ClassLoader机制（源码级别）和Java类的加载、链接和初始化两个文章中分别介绍过，当一个Java类第一次被真正使用到的时候静态资源被初始化、Java类的加载和初始化过程都是线程安全的。所以，创建一个enum类型是线程安全的。</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+</div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/15/RedisTemplate/" rel="next" title="RedisTemplate">
+                <i class="fa fa-chevron-left"></i> RedisTemplate
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/15/hooktest/" rel="prev" title="hooktest">
+                hooktest <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/avatar.png" alt="ziggle">
+            
+              <p class="site-author-name" itemprop="name">ziggle</p>
+              <p class="site-description motion-element" itemprop="description">Hail Hydra !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/youngerier" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ReentrantLock"><span class="nav-number">1.</span> <span class="nav-text">ReentrantLock</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java-静态代理"><span class="nav-number">2.</span> <span class="nav-text">java 静态代理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Stream-Java-8"><span class="nav-number">2.1.</span> <span class="nav-text">Stream(Java 8)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#aop"><span class="nav-number">2.2.</span> <span class="nav-text">aop</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tags"><span class="nav-number">3.</span> <span class="nav-text">tags:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ReentrantLock-1"><span class="nav-number">3.1.</span> <span class="nav-text">ReentrantLock</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java-静态代理-1"><span class="nav-number">3.2.</span> <span class="nav-text">java 静态代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stream-Java-8-1"><span class="nav-number">3.3.</span> <span class="nav-text">Stream(Java 8)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#aop-1"><span class="nav-number">3.4.</span> <span class="nav-text">aop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么hashmap中数组的长的是16-或2的n次幂"><span class="nav-number">3.5.</span> <span class="nav-text">为什么hashmap中数组的长的是16 或2的n次幂</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap的死锁"><span class="nav-number">3.6.</span> <span class="nav-text">HashMap的死锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java-编译参数"><span class="nav-number">3.7.</span> <span class="nav-text">java 编译参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Arthas"><span class="nav-number">3.8.</span> <span class="nav-text">Arthas</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#热更新代码"><span class="nav-number">3.8.1.</span> <span class="nav-text">热更新代码</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ziggle</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info"> Hail Hydra&mdash; </div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

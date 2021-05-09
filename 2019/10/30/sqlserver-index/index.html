@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="ziggle">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ziggle" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="获取数据库表所占空间大小(包含索引)12345678910111213-- Get Sizes of All Tables and Indexes in a Database Size of each Table (Including Indexes) SELECT    t.[Name] AS TableName,    p.[rows] AS [RowCount],    SUM(a.tota">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sqlserver-index">
+<meta property="og:url" content="http://yoursite.com/2019/10/30/sqlserver-index/index.html">
+<meta property="og:site_name" content="ziggle">
+<meta property="og:description" content="获取数据库表所占空间大小(包含索引)12345678910111213-- Get Sizes of All Tables and Indexes in a Database Size of each Table (Including Indexes) SELECT    t.[Name] AS TableName,    p.[rows] AS [RowCount],    SUM(a.tota">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2021-05-09T18:27:16.123Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sqlserver-index">
+<meta name="twitter:description" content="获取数据库表所占空间大小(包含索引)12345678910111213-- Get Sizes of All Tables and Indexes in a Database Size of each Table (Including Indexes) SELECT    t.[Name] AS TableName,    p.[rows] AS [RowCount],    SUM(a.tota">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":10,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/10/30/sqlserver-index/">
+
+
+
+
+
+  <title>sqlserver-index | ziggle</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ziggle</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Hail Hydra</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        
+          <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/30/sqlserver-index/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ziggle">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ziggle">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">sqlserver-index</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-30T18:05:06+00:00">
+                2019-10-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+<div class="semantic">
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="获取数据库表所占空间大小-包含索引"><a href="#获取数据库表所占空间大小-包含索引" class="headerlink" title="获取数据库表所占空间大小(包含索引)"></a>获取数据库表所占空间大小(包含索引)</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Get Sizes of All Tables and Indexes in a Database Size of each Table (Including Indexes) </span></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    t.[<span class="keyword">Name</span>] <span class="keyword">AS</span> TableName,</span><br><span class="line">    p.[<span class="keyword">rows</span>] <span class="keyword">AS</span> [RowCount],</span><br><span class="line">    <span class="keyword">SUM</span>(a.total_pages) * <span class="number">8</span> <span class="keyword">AS</span> TotalSpaceKB,</span><br><span class="line">    <span class="keyword">SUM</span>(a.used_pages) * <span class="number">8</span> <span class="keyword">AS</span> UsedSpaceKB</span><br><span class="line"><span class="keyword">FROM</span> sys.tables t</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> sys.indexes i <span class="keyword">ON</span> t.OBJECT_ID = i.object_id</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> sys.partitions p <span class="keyword">ON</span> i.object_id = p.OBJECT_ID <span class="keyword">AND</span> i.index_id = p.index_id</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> sys.allocation_units a <span class="keyword">ON</span> p.partition_id = a.container_id</span><br><span class="line"><span class="keyword">WHERE</span> t.is_ms_shipped = <span class="number">0</span> <span class="keyword">AND</span> i.OBJECT_ID &gt; <span class="number">255</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> t.[<span class="keyword">Name</span>], p.[<span class="keyword">Rows</span>]</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span>  UsedSpaceKB <span class="keyword">desc</span></span><br></pre></td></tr></table></figure>
+<h4 id="获取数据库索引所占空间大小"><a href="#获取数据库索引所占空间大小" class="headerlink" title="获取数据库索引所占空间大小"></a>获取数据库索引所占空间大小</h4><ul>
+<li><p>方法1</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--Size of each Index </span></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    i.[<span class="keyword">name</span>] <span class="keyword">AS</span> IndexName,</span><br><span class="line">    t.[<span class="keyword">name</span>] <span class="keyword">AS</span> TableName,</span><br><span class="line">    <span class="keyword">SUM</span>(s.[used_page_count]) * <span class="number">8</span> <span class="keyword">AS</span> IndexSizeKB</span><br><span class="line"><span class="keyword">FROM</span> sys.dm_db_partition_stats <span class="keyword">AS</span> s</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> sys.indexes <span class="keyword">AS</span> i <span class="keyword">ON</span> s.[object_id] = i.[object_id] </span><br><span class="line">    <span class="keyword">AND</span> s.[index_id] = i.[index_id]</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> sys.tables t <span class="keyword">ON</span> t.OBJECT_ID = i.object_id</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> i.[<span class="keyword">name</span>], t.[<span class="keyword">name</span>]</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> IndexSizeKB <span class="keyword">desc</span> , i.[<span class="keyword">name</span>], t.[<span class="keyword">name</span>]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>方法2</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">OBJECT_SCHEMA_NAME(i.OBJECT_ID) <span class="keyword">AS</span> SchemaName,</span><br><span class="line">OBJECT_NAME(i.OBJECT_ID) <span class="keyword">AS</span> TableName,</span><br><span class="line">i.name <span class="keyword">AS</span> IndexName,</span><br><span class="line">i.index_id <span class="keyword">AS</span> IndexID,</span><br><span class="line"><span class="number">8</span> * <span class="keyword">SUM</span>(a.used_pages) <span class="keyword">AS</span> <span class="string">'Indexsize(KB)'</span></span><br><span class="line"><span class="keyword">FROM</span> sys.indexes <span class="keyword">AS</span> i</span><br><span class="line"><span class="keyword">JOIN</span> sys.partitions <span class="keyword">AS</span> p <span class="keyword">ON</span> p.OBJECT_ID = i.OBJECT_ID <span class="keyword">AND</span> p.index_id = i.index_id</span><br><span class="line"><span class="keyword">JOIN</span> sys.allocation_units <span class="keyword">AS</span> a <span class="keyword">ON</span> a.container_id = p.partition_id</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> i.OBJECT_ID,i.index_id,i.name</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> OBJECT_NAME(i.OBJECT_ID),i.index_id</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="索引碎片检查"><a href="#索引碎片检查" class="headerlink" title="索引碎片检查"></a>索引碎片检查</h4><ul>
+<li>查找 <code>AdventureWorks2016</code> 数据库中 <code>HumanResources.Employee</code> 表内所有索引的平均碎片百分比<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> a.object_id, object_name(a.object_id) <span class="keyword">AS</span> TableName,</span><br><span class="line">      a.index_id, <span class="keyword">name</span> <span class="keyword">AS</span> IndedxName, avg_fragmentation_in_percent</span><br><span class="line"><span class="keyword">FROM</span> sys.dm_db_index_physical_stats</span><br><span class="line">    (DB_ID (N<span class="string">'AdventureWorks2016_EXT'</span>)</span><br><span class="line">        , OBJECT_ID(N<span class="string">'HumanResources.Employee'</span>)</span><br><span class="line">        , <span class="literal">NULL</span></span><br><span class="line">        , <span class="literal">NULL</span></span><br><span class="line">        , <span class="literal">NULL</span>) <span class="keyword">AS</span> a</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> sys.indexes <span class="keyword">AS</span> b</span><br><span class="line">    <span class="keyword">ON</span> a.object_id = b.object_id</span><br><span class="line">    <span class="keyword">AND</span> a.index_id = b.index_id;</span><br><span class="line">GO</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="未使用的索引"><a href="#未使用的索引" class="headerlink" title="未使用的索引"></a>未使用的索引</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> TOP <span class="number">25</span></span><br><span class="line">o.name <span class="keyword">AS</span> ObjectName</span><br><span class="line">, i.name <span class="keyword">AS</span> IndexName</span><br><span class="line">, i.index_id <span class="keyword">AS</span> IndexID</span><br><span class="line">, dm_ius.user_seeks <span class="keyword">AS</span> UserSeek</span><br><span class="line">, dm_ius.user_scans <span class="keyword">AS</span> UserScans</span><br><span class="line">, dm_ius.user_lookups <span class="keyword">AS</span> UserLookups</span><br><span class="line">, dm_ius.user_updates <span class="keyword">AS</span> UserUpdates</span><br><span class="line">, p.TableRows</span><br><span class="line">, <span class="string">'DROP INDEX '</span> + <span class="keyword">QUOTENAME</span>(i.name)</span><br><span class="line">+ <span class="string">' ON '</span> + <span class="keyword">QUOTENAME</span>(s.name) + <span class="string">'.'</span></span><br><span class="line">+ <span class="keyword">QUOTENAME</span>(OBJECT_NAME(dm_ius.OBJECT_ID)) <span class="keyword">AS</span> <span class="string">'drop statement'</span></span><br><span class="line"><span class="keyword">FROM</span> sys.dm_db_index_usage_stats dm_ius</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> sys.indexes i <span class="keyword">ON</span> i.index_id = dm_ius.index_id </span><br><span class="line"><span class="keyword">AND</span> dm_ius.OBJECT_ID = i.OBJECT_ID</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> sys.objects o <span class="keyword">ON</span> dm_ius.OBJECT_ID = o.OBJECT_ID</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> sys.schemas s <span class="keyword">ON</span> o.schema_id = s.schema_id</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> (<span class="keyword">SELECT</span> <span class="keyword">SUM</span>(p.rows) TableRows, p.index_id, p.OBJECT_ID</span><br><span class="line"><span class="keyword">FROM</span> sys.partitions p <span class="keyword">GROUP</span> <span class="keyword">BY</span> p.index_id, p.OBJECT_ID) p</span><br><span class="line"><span class="keyword">ON</span> p.index_id = dm_ius.index_id <span class="keyword">AND</span> dm_ius.OBJECT_ID = p.OBJECT_ID</span><br><span class="line"><span class="keyword">WHERE</span> OBJECTPROPERTY(dm_ius.OBJECT_ID,<span class="string">'IsUserTable'</span>) = <span class="number">1</span></span><br><span class="line"><span class="keyword">AND</span> dm_ius.database_id = DB_ID()</span><br><span class="line"><span class="keyword">AND</span> i.type_desc = <span class="string">'nonclustered'</span></span><br><span class="line"><span class="keyword">AND</span> i.is_primary_key = <span class="number">0</span></span><br><span class="line"><span class="keyword">AND</span> i.is_unique_constraint = <span class="number">0</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> (dm_ius.user_seeks + dm_ius.user_scans + dm_ius.user_lookups) <span class="keyword">ASC</span></span><br><span class="line"><span class="keyword">GO</span></span><br></pre></td></tr></table></figure>
+<h3 id="索引空间占用"><a href="#索引空间占用" class="headerlink" title="索引空间占用"></a>索引空间占用</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span> (<span class="number">1</span>) * <span class="number">8</span> / <span class="number">1024</span> <span class="keyword">AS</span> MBUsed, </span><br><span class="line">    OBJECT_SCHEMA_NAME(object_id) SchemaName, </span><br><span class="line">    <span class="keyword">name</span> <span class="keyword">AS</span> TableName, index_id   </span><br><span class="line"><span class="keyword">FROM</span> sys.dm_os_buffer_descriptors <span class="keyword">AS</span> bd   </span><br><span class="line">    <span class="keyword">INNER</span> <span class="keyword">JOIN</span>  </span><br><span class="line">    (  </span><br><span class="line">        <span class="keyword">SELECT</span> object_name(object_id) <span class="keyword">AS</span> <span class="keyword">name</span>  </span><br><span class="line">            ,index_id ,allocation_unit_id, object_id  </span><br><span class="line">        <span class="keyword">FROM</span> sys.allocation_units <span class="keyword">AS</span> au  </span><br><span class="line">            <span class="keyword">INNER</span> <span class="keyword">JOIN</span> sys.partitions <span class="keyword">AS</span> p   </span><br><span class="line">                <span class="keyword">ON</span> au.container_id = p.hobt_id   </span><br><span class="line">                    <span class="keyword">AND</span> (au.type = <span class="number">1</span> <span class="keyword">OR</span> au.type = <span class="number">3</span>)  </span><br><span class="line">        <span class="keyword">UNION</span> ALL </span><br><span class="line">        <span class="keyword">SELECT</span> object_name(object_id) <span class="keyword">AS</span> <span class="keyword">name</span>    </span><br><span class="line">            ,index_id, allocation_unit_id, object_id  </span><br><span class="line">        <span class="keyword">FROM</span> sys.allocation_units <span class="keyword">AS</span> au  </span><br><span class="line">            <span class="keyword">INNER</span> <span class="keyword">JOIN</span> sys.partitions <span class="keyword">AS</span> p   </span><br><span class="line">                <span class="keyword">ON</span> au.container_id = p.partition_id   </span><br><span class="line">                    <span class="keyword">AND</span> au.type = <span class="number">2</span>  </span><br><span class="line">    ) <span class="keyword">AS</span> obj   </span><br><span class="line">        <span class="keyword">ON</span> bd.allocation_unit_id = obj.allocation_unit_id  </span><br><span class="line"><span class="keyword">WHERE</span> database_id = DB_ID()  </span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> OBJECT_SCHEMA_NAME(object_id), <span class="keyword">name</span>, index_id   </span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">COUNT</span> (*) * <span class="number">8</span> / <span class="number">1024</span> <span class="keyword">DESC</span></span><br><span class="line"><span class="keyword">GO</span></span><br></pre></td></tr></table></figure>
+<h3 id="列出所有会话"><a href="#列出所有会话" class="headerlink" title="列出所有会话"></a>列出所有会话</h3><p>exec sp_who</p>
+<h3 id="执行时间长最消耗资源session"><a href="#执行时间长最消耗资源session" class="headerlink" title="执行时间长最消耗资源session"></a>执行时间长最消耗资源session</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> TOP(<span class="number">50</span>) qs.execution_count <span class="keyword">AS</span> [Execution <span class="keyword">Count</span>],</span><br><span class="line">(qs.total_logical_reads)*<span class="number">8</span>/<span class="number">1024.0</span> <span class="keyword">AS</span> [Total <span class="keyword">Logical</span> <span class="keyword">Reads</span> (MB)],</span><br><span class="line">(qs.total_logical_reads/qs.execution_count)*<span class="number">8</span>/<span class="number">1024.0</span> <span class="keyword">AS</span> [<span class="keyword">Avg</span> <span class="keyword">Logical</span> <span class="keyword">Reads</span> (MB)],</span><br><span class="line">(qs.total_worker_time)/<span class="number">1000.0</span> <span class="keyword">AS</span> [Total Worker <span class="keyword">Time</span> (ms)],</span><br><span class="line">(qs.total_worker_time/qs.execution_count)/<span class="number">1000.0</span> <span class="keyword">AS</span> [<span class="keyword">Avg</span> Worker <span class="keyword">Time</span> (ms)],</span><br><span class="line">(qs.total_elapsed_time)/<span class="number">1000.0</span> <span class="keyword">AS</span> [Total Elapsed <span class="keyword">Time</span> (ms)],</span><br><span class="line">(qs.total_elapsed_time/qs.execution_count)/<span class="number">1000.0</span> <span class="keyword">AS</span> [<span class="keyword">Avg</span> Elapsed <span class="keyword">Time</span> (ms)],</span><br><span class="line">qs.creation_time <span class="keyword">AS</span> [<span class="keyword">Creation</span> <span class="keyword">Time</span>]</span><br><span class="line">,t.text <span class="keyword">AS</span> [<span class="keyword">Complete</span> <span class="keyword">Query</span> <span class="built_in">Text</span>], qp.query_plan <span class="keyword">AS</span> [<span class="keyword">Query</span> Plan]</span><br><span class="line"><span class="keyword">FROM</span> sys.dm_exec_query_stats <span class="keyword">AS</span> qs <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line"><span class="keyword">CROSS</span> <span class="keyword">APPLY</span> sys.dm_exec_sql_text(plan_handle) <span class="keyword">AS</span> t</span><br><span class="line"><span class="keyword">CROSS</span> <span class="keyword">APPLY</span> sys.dm_exec_query_plan(plan_handle) <span class="keyword">AS</span> qp</span><br><span class="line"><span class="keyword">WHERE</span> t.dbid = DB_ID()</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> qs.execution_count <span class="keyword">DESC</span> <span class="keyword">OPTION</span> (RECOMPILE);<span class="comment">-- frequently ran query</span></span><br><span class="line"><span class="comment">-- ORDER BY [Total Logical Reads (MB)] DESC OPTION (RECOMPILE);-- High Disk Reading query</span></span><br><span class="line"><span class="comment">-- ORDER BY [Avg Worker Time (ms)] DESC OPTION (RECOMPILE);-- High CPU query</span></span><br><span class="line"><span class="comment">-- ORDER BY [Avg Elapsed Time (ms)] DESC OPTION (RECOMPILE);-- Long Running query</span></span><br></pre></td></tr></table></figure>
+<h3 id="加速索引重建"><a href="#加速索引重建" class="headerlink" title="加速索引重建"></a>加速索引重建</h3><ul>
+<li>使用 <code>SORT_IN_TEMPDB</code> 加速重建索引,tempdb 与userdatabase 不在相同磁盘上有效<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">INDEX</span> [NameOfTheIndex] <span class="keyword">ON</span> [SchemaName].[TableName]</span><br><span class="line"><span class="keyword">REBUILD</span> <span class="keyword">PARTITION</span> = ALL <span class="keyword">WITH</span> (SORT_IN_TEMPDB = <span class="keyword">ON</span>)</span><br><span class="line"><span class="keyword">GO</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="优化索引方向"><a href="#优化索引方向" class="headerlink" title="优化索引方向"></a>优化索引方向</h3><p><code>谓词 == 筛选条件</code></p>
+<p>SQL Server 查询优化器是基于成本的查询优化器。 也就是说，它选择估计处理成本最低的查询计划。 查询优化器基于以下两个主要因素来确定执行查询计划的开销：</p>
+<ul>
+<li>查询计划每个级别上处理的总行数，称为该计划的基数。</li>
+<li>由查询中所使用的运算符规定的算法的开销模式。</li>
+</ul>
+<p>第一个因素（基数）用作第二个因素（开销模式）的输入参数。 因此，增大基数将减少估计开销，从而加快执行计划。<br>SQL Server 中的基数估计 (CE)主 要派生自创建索引或统计信息时所创建的直方图（以手动或自动方式）。 有时，SQL Server 还使用查询的约束信息和逻辑重写来确定基数。<br>在下列情况下，SQL Server 无法精确计算基数。 这会导致成本计算不准确，进而可能导致查询计划欠佳。 避免在查询中使用这些构造可以提高查询性能。 有时，使用查询表达式或其他措施也可以提高查询性能，如下所述：</p>
+<ul>
+<li>带谓词的查询，这些查询在同一表的不同列之间使用比较运算符。</li>
+<li>带谓词的查询，这些查询使用运算符且下列任何一种情况为 True：</li>
+<li>运算符两侧所涉及的列中没有统计信息。</li>
+<li>统计信息中值的分布不均匀，但查询将查找高选择性的值集。 特别是，当运算符是除相等 (=) 运算符以外的任何其他运算符时，这种情况可能为 True。</li>
+<li>谓词使用不等于 (!=) 比较运算符或 NOT 逻辑运算符。</li>
+<li>使用任意 SQL Server 内置函数或标量值用户定义函数（其参数不是常量值）的查询。</li>
+<li>包含通过算术或字符串串联运算符联接的列的查询。</li>
+<li>比较在编译或优化查询时其值未知的变量的查询。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+</div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/23/spring-simplejdbccall/" rel="next" title="spring-simplejdbccall">
+                <i class="fa fa-chevron-left"></i> spring-simplejdbccall
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/26/spring-security/" rel="prev" title="spring-security">
+                spring-security <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/avatar.png" alt="ziggle">
+            
+              <p class="site-author-name" itemprop="name">ziggle</p>
+              <p class="site-description motion-element" itemprop="description">Hail Hydra !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/youngerier" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#获取数据库表所占空间大小-包含索引"><span class="nav-number">1.</span> <span class="nav-text">获取数据库表所占空间大小(包含索引)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取数据库索引所占空间大小"><span class="nav-number">2.</span> <span class="nav-text">获取数据库索引所占空间大小</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#索引碎片检查"><span class="nav-number">3.</span> <span class="nav-text">索引碎片检查</span></a></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#未使用的索引"><span class="nav-number"></span> <span class="nav-text">未使用的索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引空间占用"><span class="nav-number"></span> <span class="nav-text">索引空间占用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列出所有会话"><span class="nav-number"></span> <span class="nav-text">列出所有会话</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行时间长最消耗资源session"><span class="nav-number"></span> <span class="nav-text">执行时间长最消耗资源session</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加速索引重建"><span class="nav-number"></span> <span class="nav-text">加速索引重建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化索引方向"><span class="nav-number"></span> <span class="nav-text">优化索引方向</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ziggle</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info"> Hail Hydra&mdash; </div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
